@@ -19,6 +19,9 @@ enum ActionState {
 var state: int = PlayerState.MOVE
 var velocity: Vector2 = Vector2.ZERO
 
+onready var anim_player: AnimationPlayer = $AnimationPlayer
+onready var anim_tree: AnimationTree = $AnimationTree
+
 
 func _physics_process(delta):
 	match state:
@@ -39,6 +42,7 @@ func move_state(delta):
 	input_vector = input_vector.normalized()
 	
 	if input_vector.length() != 0:
+		anim_tree.set("parameters/idle/blend_position", input_vector)
 		velocity = velocity.move_toward(speed * input_vector, acceleration * delta)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
