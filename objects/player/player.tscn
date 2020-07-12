@@ -127,3 +127,10 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 12 )
 parameters/idle/blend_position = Vector2( 0, 0 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 0, -6 )
+rotation = 3.14159
+enabled = true
+cast_to = Vector2( 0, 10 )
+collide_with_areas = true
