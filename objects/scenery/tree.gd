@@ -1,8 +1,10 @@
 extends StaticBody2D
 
+
 var hp : int = 5
 
 onready var anim_player : AnimationPlayer = $AnimationPlayer
+
 
 func _ready() -> void:
 	anim_player.playback_speed = 10

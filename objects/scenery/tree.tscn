@@ -4,9 +4,9 @@
 [ext_resource path="res://objects/scenery/tree.gd" type="Script" id=2]
 [ext_resource path="res://objects/scenery/hurtbox.gd" type="Script" id=3]
 
-[sub_resource type="CapsuleShape2D" id=4]
-radius = 2.99998
-height = 12.0
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 1.99998
+height = 14.0
 
 [sub_resource type="Animation" id=2]
 resource_name = "death"
@@ -66,6 +66,7 @@ tracks/3/keys = {
 extents = Vector2( 6, 10 )
 
 [node name="Tree" type="StaticBody2D"]
+collision_layer = 2
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -75,18 +76,20 @@ hframes = 2
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 2, -3 )
+position = Vector2( 3, -2 )
 rotation = 1.5708
-shape = SubResource( 4 )
+shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/death = SubResource( 2 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 4
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 modulate = Color( 1, 0.164706, 0.164706, 1 )
 position = Vector2( 1, -10 )
+z_index = 10
 shape = SubResource( 3 )
 [connection signal="hurtbox_hit" from="Hurtbox" to="." method="_on_hurtbox_hit"]

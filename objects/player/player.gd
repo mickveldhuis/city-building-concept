@@ -27,10 +27,7 @@ onready var ray_cast : RayCast2D = $RayCast2D
 
 
 func _process (delta):
-	var input_vector = global_position - get_global_mouse_position()
-	input_vector = input_vector.normalized()
-	
-	ray_cast.cast_to = input_vector * interaction_dist
+	update_raycast_position()
 	
 	if Input.is_action_just_pressed("action"):
 		interact(false)
@@ -72,15 +69,15 @@ func move_state(delta):
 #		state = PlayerState.ACTION
 		pass
 
-func attack_state(delta):
+func attack_state(delta) -> void:
 	pass
 
 
-func action_state(delta):
+func action_state(delta) -> void:
 	pass
 
 
-func move():
+func move() -> void:
 	velocity = move_and_slide(velocity)
 
 
@@ -90,3 +87,10 @@ func interact(is_attack : bool) -> void:
 			ray_cast.get_collider().on_hit(self, tool_dmg)
 		elif not is_attack and ray_cast.get_collider().has_method("on_interact"):
 			ray_cast.get_collider().on_interact(self)
+
+
+func update_raycast_position() -> void:
+	var mouse_dir = ray_cast.global_position - get_global_mouse_position()
+	mouse_dir = mouse_dir.normalized()
+	
+	ray_cast.cast_to = mouse_dir * interaction_dist
