@@ -1,7 +1,10 @@
 extends StaticBody2D
 
 
-var hp : int = 5
+export(int) var hp = 5
+
+var log_dispersion : Vector2 = Vector2(hp, 3*hp)
+var pos_dispersion : int = 20
 
 onready var pickup : PackedScene = preload("res://objects/pickups/pickup.tscn")
 onready var anim_player : AnimationPlayer = $AnimationPlayer
@@ -17,11 +20,20 @@ func on_death() -> void:
 
 
 func drop_loot() -> void:
-	var wood = pickup.instance()
-	wood.global_position = global_position
+	var num_logs : int = int(rand_range(log_dispersion.x, log_dispersion.y))
+	print("the number of logs", num_logs)
 	
-	var world = get_tree().current_scene
-	world.add_child(wood)
+	for n in range(num_logs):
+		var disp = int(rand_range(-pos_dispersion, pos_dispersion))
+		var log_x : int = int(rand_range(-disp, disp))
+		var log_y : int = int(rand_range(-disp, disp))
+		var pos_disp : Vector2 = Vector2(log_x, log_y)
+		
+		var wood = pickup.instance()
+		wood.global_position = global_position + pos_disp
+		
+		var world = get_tree().current_scene
+		world.get_node("Pickups").add_child(wood)
 
 
 func _on_hurtbox_hit(body : KinematicBody2D, dmg : int) -> void:
