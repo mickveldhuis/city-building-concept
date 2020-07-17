@@ -77,6 +77,8 @@ tile_data = PoolIntArray( -65534, 0, 65536, -65533, 0, 65537, -65532, 0, 65537, 
 
 [node name="YSort" type="YSort" parent="."]
 
+[node name="Pickups" type="YSort" parent="YSort"]
+
 [node name="Trees" type="YSort" parent="YSort"]
 position = Vector2( 0, 32.0331 )
 
@@ -98,6 +100,9 @@ position = Vector2( 112, 280.289 )
 [node name="Tree6" parent="YSort/Trees" instance=ExtResource( 4 )]
 position = Vector2( 328, 328.339 )
 
+[node name="Tree7" parent="YSort/Trees" instance=ExtResource( 4 )]
+position = Vector2( 200, 200.207 )
+
 [node name="Tree (bare)" parent="YSort/Trees" instance=ExtResource( 4 )]
 position = Vector2( 256, 168.174 )
 
@@ -109,5 +114,3 @@ position = Vector2( 224, 128.132 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 368, 112.116 )
-
-[node name="Pickups" type="Node" parent="."]

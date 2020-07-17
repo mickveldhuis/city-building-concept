@@ -33,7 +33,7 @@ func drop_loot() -> void:
 		wood.global_position = global_position + pos_disp
 		
 		var world = get_tree().current_scene
-		world.get_node("Pickups").add_child(wood)
+		world.get_node("YSort/Pickups").add_child(wood)
 
 
 func _on_hurtbox_hit(body : KinematicBody2D, dmg : int) -> void:
