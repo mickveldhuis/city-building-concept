@@ -1,10 +1,14 @@
 extends HBoxContainer
 
 
-signal drop_item(item_type, amount)
+onready var tool_rect : TextureRect = $ToolSlot/ToolIcon
+onready var item_rect : TextureRect = $ItemSlot/ItemIcon
+onready var item_counter : Label = $ItemSlot/ItemCounter
 
-onready var tool_rect : TextureRect = $ToolSlot/Tool
-onready var item_rect : TextureRect = $ItemSlot/Item
+
+func _ready() -> void:
+	item_counter.text = str(Inventory.get_item_count())
+	Inventory.connect("item_count_modified", self, "_on_item_count_modified")
 
 
 func _process(delta: float) -> void:
@@ -14,9 +18,12 @@ func _process(delta: float) -> void:
 		pass
 
 
-func change_tool() -> void:
+func _on_tool_swapped() -> void:
 	pass
 
 
-func drop_item() -> void:
+func _on_item_dropped() -> void:
 	pass
+
+func _on_item_count_modified(amount : int) -> void:
+	item_counter.text = str(amount)

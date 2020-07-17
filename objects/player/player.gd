@@ -94,3 +94,13 @@ func update_raycast_position() -> void:
 	mouse_dir = mouse_dir.normalized()
 	
 	ray_cast.cast_to = mouse_dir * interaction_dist
+
+
+func is_in_inventory(item_type : String) -> bool:
+	# Check if the item that the player is picking up is in the inventory
+	return true
+
+
+func add_to_inventory(amount : int) -> void:
+	print("picked up")
+	Inventory.modify_item_count_by(amount)

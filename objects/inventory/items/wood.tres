@@ -7,4 +7,5 @@
 script = ExtResource( 2 )
 type = "wood"
 amount = 0
+max_amount = 999
 icon = ExtResource( 1 )
