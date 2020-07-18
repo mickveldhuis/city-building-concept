@@ -4,6 +4,7 @@ export(int) var speed = 70
 export(int) var acceleration = 450
 export(int) var friction = 300
 export(int) var interaction_dist = 10
+export(int) var item_drop_radius = 40
 
 enum PlayerState {
 	MOVE,
@@ -23,6 +24,10 @@ var velocity: Vector2 = Vector2.ZERO
 onready var anim_player: AnimationPlayer = $AnimationPlayer
 onready var anim_tree: AnimationTree = $AnimationTree
 onready var ray_cast : RayCast2D = $RayCast2D
+
+
+func _ready() -> void:
+	Inventory.connect("item_dropped", self, "_on_item_dropped")
 
 
 func _process (delta):
@@ -97,10 +102,27 @@ func update_raycast_position() -> void:
 
 
 func is_in_inventory(item_type : String) -> bool:
-	# Check if the item that the player is picking up is in the inventory
-	return true
+	var in_inv : bool = false
+	if Inventory.current_item.type == item_type:
+		in_inv = true
+	
+	return in_inv
 
 
 func add_to_inventory(amount : int) -> void:
-	print("picked up")
+	print(Inventory.current_item.type, ": ", Inventory.current_item.amount)
 	Inventory.modify_item_count_by(amount)
+
+
+func _on_item_dropped() -> void:
+	for n in range(Inventory.current_item.amount):
+		var disp = int(rand_range(-item_drop_radius, item_drop_radius))
+		var x : int = int(rand_range(-disp, disp))
+		var y : int = int(rand_range(-disp, disp))
+		var pos_disp : Vector2 = Vector2(x, y)
+
+		var item = ResourceManager.pickups[Inventory.current_item.type].instance()
+		item.global_position = global_position + pos_disp
+
+		var world = get_tree().current_scene
+		world.get_node("YSort/Pickups").add_child(item)

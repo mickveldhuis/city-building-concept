@@ -9,3 +9,8 @@ func _on_body_entered(body: Node) -> void:
 		if body.is_in_inventory(type):
 			body.add_to_inventory(amount)
 			queue_free()
+		elif Inventory.current_item.type == "empty":
+			Inventory.set_item(type)
+			body.add_to_inventory(amount)
+			queue_free()
+			

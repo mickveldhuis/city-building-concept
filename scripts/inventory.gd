@@ -1,19 +1,13 @@
 extends Node
 
-signal item_count_modified(amount)
+
+signal item_count_modified
+signal item_type_changed
+signal item_dropped
 signal tool_swapped
 
-onready var tools = {
-	"axe": load("res://objects/inventory/tools/axe.tres"),
-	"pickaxe": load("res://objects/inventory/tools/pickaxe.tres"),
-}
-
-#onready var pickaxe : BaseTool = load("res://objects/inventory/tools/pickaxe.tres")
-#onready var axe : BaseTool = load("res://objects/inventory/tools/axe.tres")
-onready var current_tool : BaseTool = tools["axe"]
-
-onready var wood : BaseItem = load("res://objects/inventory/items/wood.tres")
-onready var current_item : BaseItem = wood
+onready var current_tool : BaseTool = ResourceManager.tools["axe"]
+onready var current_item : BaseItem = ResourceManager.items["empty"]
 
 
 func modify_item_count_by(n : int) -> void:
@@ -26,22 +20,22 @@ func modify_item_count_by(n : int) -> void:
 	else:
 		current_item.amount = current_item.max_amount
 	
-	emit_signal("item_count_modified", current_item.amount)
+	emit_signal("item_count_modified")
 
 
 func drop_items() -> void:
-	# TO DO: Remove the item from the slot and insert a blank resource
+	emit_signal("item_dropped")
+	
 	current_item.amount = 0
+	set_item("empty")	
 
 
 func swap_tool() -> void:
 	match current_tool.name:
 		"axe":
-			current_tool = tools["pickaxe"]
+			set_tool("pickaxe")
 		"pickaxe":
-			current_tool = tools["axe"]
-	
-	emit_signal("tool_swapped")
+			set_tool("axe")
 
 
 func get_item_count() -> int:
@@ -49,3 +43,13 @@ func get_item_count() -> int:
 		return 0
 	
 	return current_item.amount
+
+
+func set_tool(tool_name : String) -> void:
+	current_tool = ResourceManager.tools[tool_name]
+	emit_signal("tool_swapped")
+
+
+func set_item(item_name : String) -> void:
+	current_item = ResourceManager.items[item_name]
+	emit_signal("item_type_changed")
