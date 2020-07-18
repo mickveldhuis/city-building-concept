@@ -110,7 +110,6 @@ func is_in_inventory(item_type : String) -> bool:
 
 
 func add_to_inventory(amount : int) -> void:
-	print(Inventory.current_item.type, ": ", Inventory.current_item.amount)
 	Inventory.modify_item_count_by(amount)
 
 
@@ -122,6 +121,7 @@ func _on_item_dropped() -> void:
 		var pos_disp : Vector2 = Vector2(x, y)
 
 		var item = ResourceManager.pickups[Inventory.current_item.type].instance()
+		item.enable_timer()
 		item.global_position = global_position + pos_disp
 
 		var world = get_tree().current_scene
