@@ -4,7 +4,6 @@ export(int) var speed = 70
 export(int) var acceleration = 450
 export(int) var friction = 300
 export(int) var interaction_dist = 10
-export(int) var tool_dmg = 2 
 
 enum PlayerState {
 	MOVE,
@@ -84,7 +83,8 @@ func move() -> void:
 func interact(is_attack : bool) -> void:
 	if ray_cast.is_colliding():
 		if is_attack and ray_cast.get_collider().has_method("on_hit"):
-			ray_cast.get_collider().on_hit(self, tool_dmg)
+			ray_cast.get_collider().on_hit(self, Inventory.current_tool.damage, 
+												 Inventory.current_tool.name)
 		elif not is_attack and ray_cast.get_collider().has_method("on_interact"):
 			ray_cast.get_collider().on_interact(self)
 

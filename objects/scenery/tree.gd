@@ -36,8 +36,9 @@ func drop_loot() -> void:
 		world.get_node("YSort/Pickups").add_child(wood)
 
 
-func _on_hurtbox_hit(body : KinematicBody2D, dmg : int) -> void:
-	hp -= dmg
+func _on_hurtbox_hit(body : KinematicBody2D, dmg : int, type : String) -> void:
+	if type == "axe":
+		hp -= dmg
 	
 	if hp <= 0:
 		anim_player.play("death", 2)
