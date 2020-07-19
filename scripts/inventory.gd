@@ -6,8 +6,8 @@ signal item_type_changed
 signal item_dropped
 signal tool_swapped
 
-onready var current_tool : BaseTool = ResourceManager.tools["axe"]
-onready var current_item : BaseItem = ResourceManager.items["empty"]
+onready var current_tool : BaseTool = ResourceManager.tools[Global.ToolType.AXE]
+onready var current_item : BaseItem = ResourceManager.items[Global.ItemType.EMPTY]
 
 
 func modify_item_count_by(n : int) -> void:
@@ -27,15 +27,15 @@ func drop_items() -> void:
 	emit_signal("item_dropped")
 	
 	current_item.amount = 0
-	set_item("empty")	
+	set_item(Global.ItemType.EMPTY)	
 
 
 func swap_tool() -> void:
-	match current_tool.name:
-		"axe":
-			set_tool("pickaxe")
-		"pickaxe":
-			set_tool("axe")
+	match current_tool.type:
+		Global.ToolType.AXE:
+			set_tool(Global.ToolType.PICKAXE)
+		Global.ToolType.PICKAXE:
+			set_tool(Global.ToolType.AXE)
 
 
 func get_item_count() -> int:
@@ -45,11 +45,11 @@ func get_item_count() -> int:
 	return current_item.amount
 
 
-func set_tool(tool_name : String) -> void:
-	current_tool = ResourceManager.tools[tool_name]
+func set_tool(type : int) -> void:
+	current_tool = ResourceManager.tools[type]
 	emit_signal("tool_swapped")
 
 
-func set_item(item_name : String) -> void:
-	current_item = ResourceManager.items[item_name]
+func set_item(type : int) -> void:
+	current_item = ResourceManager.items[type]
 	emit_signal("item_type_changed")

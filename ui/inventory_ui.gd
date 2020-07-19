@@ -19,10 +19,10 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("swap_tools"):
 		Inventory.swap_tool()
 	if Input.is_action_just_pressed("drop_item") \
-	   and Inventory.current_item.type != BaseItem.ItemType.EMPTY:
+	   and Inventory.current_item.type != Global.ItemType.EMPTY:
 		Inventory.drop_items()
 	
-	if Inventory.current_item.type == BaseItem.ItemType.EMPTY:
+	if Inventory.current_item.type == Global.ItemType.EMPTY:
 		item_counter.text = ""
 
 

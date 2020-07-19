@@ -27,7 +27,7 @@ func drop_loot() -> void:
 		var log_y : int = int(rand_range(-disp, disp))
 		var pos_disp : Vector2 = Vector2(log_x, log_y)
 		
-		var wood = ResourceManager.pickups["wood"].instance()
+		var wood = ResourceManager.pickups[Global.ItemType.WOOD].instance()
 		wood.global_position = global_position + pos_disp
 		
 		var world = get_tree().current_scene
@@ -35,7 +35,7 @@ func drop_loot() -> void:
 
 
 func _on_hurtbox_hit(body : KinematicBody2D, dmg : int, type : int) -> void:
-	if type == BaseTool.ToolType.AXE:
+	if type == Global.ToolType.AXE:
 		hp -= dmg
 	
 	if hp <= 0:

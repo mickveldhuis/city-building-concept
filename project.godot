@@ -31,6 +31,7 @@ run/main_scene="res://scenes/world.tscn"
 
 [autoload]
 
+Global="*res://scripts/global.gd"
 ResourceManager="*res://scripts/resource_manager.gd"
 Inventory="*res://scripts/inventory.gd"
 

@@ -2,14 +2,9 @@ extends Resource
 
 class_name BaseTool
 
-enum ToolType {
-	AXE,
-	PICKAXE,
-	SWORD,
-}
 
 export(String) var name = "axe"
-export(ToolType) var type = ToolType.AXE
+export(Global.ToolType) var type = Global.ToolType.AXE
 export(bool) var is_weapon = false
 export(int, 0, 100) var damage = 1
 export(Texture) var icon = null

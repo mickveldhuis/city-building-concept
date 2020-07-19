@@ -122,7 +122,7 @@ func _on_item_dropped() -> void:
 		var y : int = int(rand_range(-disp, disp))
 		var pos_disp : Vector2 = Vector2(x, y)
 
-		var item = ResourceManager.pickups[Inventory.current_item.name].instance()
+		var item = ResourceManager.pickups[Inventory.current_item.type].instance()
 		item.enable_timer()
 		item.global_position = global_position + pos_disp
 
