@@ -10,3 +10,4 @@ type = 0
 amount = 0
 max_amount = 0
 icon = ExtResource( 2 )
+sprite = ExtResource( 2 )
