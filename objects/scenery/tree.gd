@@ -4,7 +4,7 @@ extends StaticBody2D
 export(int) var hp = 5
 
 var log_dispersion : Vector2 = Vector2(hp, 3*hp)
-var pos_dispersion : int = 40
+var pos_dispersion : int = 30
 
 onready var anim_player : AnimationPlayer = $AnimationPlayer
 
@@ -21,7 +21,7 @@ func on_death() -> void:
 func drop_loot() -> void:
 	var num_logs : int = int(rand_range(log_dispersion.x, log_dispersion.y))
 	
-	for n in range(num_logs):
+	for _n in range(num_logs):
 		var disp = int(rand_range(-pos_dispersion, pos_dispersion))
 		var log_x : int = int(rand_range(-disp, disp))
 		var log_y : int = int(rand_range(-disp, disp))
@@ -34,8 +34,8 @@ func drop_loot() -> void:
 		world.get_node("YSort/Pickups").add_child(wood)
 
 
-func _on_hurtbox_hit(body : KinematicBody2D, dmg : int, type : String) -> void:
-	if type == "axe":
+func _on_hurtbox_hit(body : KinematicBody2D, dmg : int, type : int) -> void:
+	if type == BaseTool.ToolType.AXE:
 		hp -= dmg
 	
 	if hp <= 0:

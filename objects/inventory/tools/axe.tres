@@ -7,5 +7,7 @@
 script = ExtResource( 1 )
 name = "axe"
 type = 0
+is_weapon = false
 damage = 2
 icon = ExtResource( 2 )
+cooldown = 0.5

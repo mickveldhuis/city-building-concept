@@ -24,6 +24,7 @@ var velocity: Vector2 = Vector2.ZERO
 onready var anim_player: AnimationPlayer = $AnimationPlayer
 onready var anim_tree: AnimationTree = $AnimationTree
 onready var ray_cast : RayCast2D = $RayCast2D
+onready var action_timer : Timer = $ActionTimer
 
 
 func _ready() -> void:
@@ -35,8 +36,9 @@ func _process (delta):
 	
 	if Input.is_action_just_pressed("action"):
 		interact(false)
-	elif Input.is_action_just_pressed("attack"):
+	elif Input.is_action_just_pressed("attack") and action_timer.is_stopped():
 		interact(true)
+		action_timer.start(Inventory.current_tool.cooldown)
 
 
 func _physics_process(delta):
@@ -51,7 +53,7 @@ func _physics_process(delta):
 			action_state(delta)
 
 	
-func move_state(delta):
+func move_state(delta : float) -> void:
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	input_vector.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
@@ -85,12 +87,12 @@ func move() -> void:
 	velocity = move_and_slide(velocity)
 
 
-func interact(is_attack : bool) -> void:
+func interact(does_damage : bool = false) -> void:
 	if ray_cast.is_colliding():
-		if is_attack and ray_cast.get_collider().has_method("on_hit"):
+		if does_damage and ray_cast.get_collider().has_method("on_hit"):
 			ray_cast.get_collider().on_hit(self, Inventory.current_tool.damage, 
-												 Inventory.current_tool.name)
-		elif not is_attack and ray_cast.get_collider().has_method("on_interact"):
+												 Inventory.current_tool.type)
+		elif not does_damage and ray_cast.get_collider().has_method("on_interact"):
 			ray_cast.get_collider().on_interact(self)
 
 
@@ -101,7 +103,7 @@ func update_raycast_position() -> void:
 	ray_cast.cast_to = mouse_dir * interaction_dist
 
 
-func is_in_inventory(item_type : String) -> bool:
+func is_in_inventory(item_type : int) -> bool:
 	var in_inv : bool = false
 	if Inventory.current_item.type == item_type:
 		in_inv = true
@@ -114,13 +116,13 @@ func add_to_inventory(amount : int) -> void:
 
 
 func _on_item_dropped() -> void:
-	for n in range(Inventory.current_item.amount):
+	for _n in range(Inventory.current_item.amount):
 		var disp = int(rand_range(-item_drop_radius, item_drop_radius))
 		var x : int = int(rand_range(-disp, disp))
 		var y : int = int(rand_range(-disp, disp))
 		var pos_disp : Vector2 = Vector2(x, y)
 
-		var item = ResourceManager.pickups[Inventory.current_item.type].instance()
+		var item = ResourceManager.pickups[Inventory.current_item.name].instance()
 		item.enable_timer()
 		item.global_position = global_position + pos_disp
 

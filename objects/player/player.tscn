@@ -147,3 +147,6 @@ enabled = true
 cast_to = Vector2( 0, 10 )
 collision_mask = 4
 collide_with_areas = true
+
+[node name="ActionTimer" type="Timer" parent="."]
+one_shot = true

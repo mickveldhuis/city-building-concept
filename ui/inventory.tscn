@@ -57,15 +57,14 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -26.0
-margin_top = -15.0
+margin_top = -16.0
 margin_right = -6.0
-margin_bottom = -7.0
+margin_bottom = -8.0
 grow_horizontal = 0
 theme = ExtResource( 5 )
 text = "1"
 align = 2
 valign = 2
-autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

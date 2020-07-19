@@ -21,7 +21,9 @@ __meta__ = {
 }
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
-margin_right = 320.0
+margin_right = 480.0
 margin_bottom = 40.0
 
 [node name="Inventory" parent="MarginContainer/CenterContainer" instance=ExtResource( 2 )]
+margin_left = 206.0
+margin_right = 274.0

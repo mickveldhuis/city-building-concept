@@ -5,7 +5,8 @@
 
 [resource]
 script = ExtResource( 1 )
-type = "empty"
+name = "empty"
+type = 0
 amount = 0
 max_amount = 0
 icon = ExtResource( 2 )

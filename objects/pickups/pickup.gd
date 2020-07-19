@@ -1,6 +1,7 @@
 extends Area2D
 
-var type : String = "wood"
+var _name : String = "wood"
+var type : int = BaseItem.ItemType.WOOD
 var amount : int = 1
 var timer_wait_time : float = 1
 
@@ -31,10 +32,11 @@ func create_timer(wait_time : float) -> void:
 func _on_body_entered(body: Node) -> void:
 	if body.has_method("is_in_inventory") and body.has_method("add_to_inventory") \
 	   and (not has_timer or timer.is_stopped()):
-		if body.is_in_inventory(type):
+		if body.is_in_inventory(type) \
+		   and Inventory.current_item.amount < Inventory.current_item.max_amount:
 			body.add_to_inventory(amount)
 			queue_free()
-		elif Inventory.current_item.type == "empty":
-			Inventory.set_item(type)
+		elif Inventory.current_item.type == BaseItem.ItemType.EMPTY:
+			Inventory.set_item(_name)
 			body.add_to_inventory(amount)
 			queue_free()
