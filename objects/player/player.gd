@@ -23,6 +23,7 @@ var velocity: Vector2 = Vector2.ZERO
 
 onready var anim_player: AnimationPlayer = $AnimationPlayer
 onready var anim_tree: AnimationTree = $AnimationTree
+onready var anim_state : AnimationNodeStateMachinePlayback = anim_tree.get("parameters/playback")
 onready var ray_cast : RayCast2D = $RayCast2D
 onready var action_timer : Timer = $ActionTimer
 
@@ -61,8 +62,11 @@ func move_state(delta : float) -> void:
 	
 	if input_vector.length() != 0:
 		anim_tree.set("parameters/idle/blend_position", input_vector)
+		anim_tree.set("parameters/walk/blend_position", input_vector)
+		anim_state.travel("walk")
 		velocity = velocity.move_toward(speed * input_vector, acceleration * delta)
 	else:
+		anim_state.travel("idle")
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 	
 	move()
