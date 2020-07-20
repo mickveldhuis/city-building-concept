@@ -1,7 +1,7 @@
 extends Area2D
 
 
-export(Global.ItemType) var item_type = Global.ItemType.WOOD
+export(Global.ItemType) var item_type = Global.ItemType.EMPTY
 var amount : int = 1
 var timer_wait_time : float = 1
 
@@ -9,11 +9,8 @@ var has_timer : bool = false
 var timer_finished : bool = false
 var timer : Timer
 
-onready var sprite : Sprite = $Sprite
 
 func _ready() -> void:
-	sprite.texture = ResourceManager.items[item_type].sprite
-	
 	if has_timer:
 		create_timer(timer_wait_time)
 
