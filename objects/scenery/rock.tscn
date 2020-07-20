@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/rocks.png" type="Texture" id=1]
 [ext_resource path="res://objects/scenery/rock.gd" type="Script" id=2]
 [ext_resource path="res://objects/scenery/hurtbox.gd" type="Script" id=3]
+[ext_resource path="res://assets/sound_effects/pickaxe.wav" type="AudioStream" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.99996
@@ -81,6 +82,10 @@ shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/death = SubResource( 2 )
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+volume_db = 5.0
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 4

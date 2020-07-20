@@ -7,6 +7,7 @@ var stone_dispersion : Vector2 = Vector2(hp, 3*hp)
 var pos_dispersion : int = 30
 
 onready var anim_player : AnimationPlayer = $AnimationPlayer
+onready var hit_sound : AudioStreamPlayer2D = $HitSound
 
 
 func _ready() -> void:
@@ -35,6 +36,8 @@ func drop_loot() -> void:
 
 
 func _on_hurtbox_hit(body : KinematicBody2D, dmg : int, type : int) -> void:
+	hit_sound.play()
+	
 	if type == Global.ToolType.PICKAXE:
 		hp -= dmg
 	
