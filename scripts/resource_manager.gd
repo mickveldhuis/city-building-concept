@@ -1,5 +1,8 @@
 extends Node
 
+onready var sprites = {
+	"mouse_default": preload("res://assets/ui/cursor.png"),
+}
 onready var tools = {
 	Global.ToolType.AXE: preload("res://objects/inventory/tools/axe.tres"),
 	Global.ToolType.PICKAXE: preload("res://objects/inventory/tools/pickaxe.tres"),

@@ -222,7 +222,6 @@ editor_draw_limits = true
 position = Vector2( 0, -14 )
 texture = ExtResource( 2 )
 hframes = 12
-frame = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -6 )
