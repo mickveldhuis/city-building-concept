@@ -8,8 +8,9 @@ export(int) var item_drop_radius = 40
 
 enum PlayerState {
 	MOVE,
-	ATTACK,
 	ACTION,
+	INTERACT,
+	BUILD,
 }
 
 enum ActionState {
@@ -18,8 +19,8 @@ enum ActionState {
 	GATHERING,
 }
 
-var state: int = PlayerState.MOVE
-var velocity: Vector2 = Vector2.ZERO
+var state : int = PlayerState.MOVE setget set_state, get_state
+var velocity : Vector2 = Vector2.ZERO
 
 onready var anim_player: AnimationPlayer = $AnimationPlayer
 onready var anim_tree: AnimationTree = $AnimationTree
@@ -29,17 +30,12 @@ onready var action_timer : Timer = $ActionTimer
 
 
 func _ready() -> void:
+	anim_tree.active = true	
 	Inventory.connect("item_dropped", self, "_on_item_dropped")
 
 
 func _process (delta):
 	update_raycast_position()
-	
-	if Input.is_action_just_pressed("action"):
-		interact(false)
-	elif Input.is_action_just_pressed("attack") and action_timer.is_stopped():
-		interact(true)
-		action_timer.start(Inventory.current_tool.cooldown)
 
 
 func _physics_process(delta):
@@ -47,11 +43,14 @@ func _physics_process(delta):
 		PlayerState.MOVE:
 			move_state(delta)
 		
-		PlayerState.ATTACK:
-			attack_state(delta)
+		PlayerState.INTERACT:
+			interact_state(delta)
 
 		PlayerState.ACTION:
 			action_state(delta)
+		
+		PlayerState.BUILD:
+			build_state(delta)
 
 	
 func move_state(delta : float) -> void:
@@ -71,20 +70,42 @@ func move_state(delta : float) -> void:
 	
 	move()
 	
-	if Input.is_action_just_pressed("attack"):
-#		state = PlayerState.ATTACK
-		pass
-	
-	if Input.is_action_just_pressed("action"):
-#		state = PlayerState.ACTION
-		pass
-
-func attack_state(delta) -> void:
-	pass
+	if Input.is_action_just_pressed("interact"):
+		interact(false)
+#		set_state(PlayerState.INTERACT)
+	elif Input.is_action_just_pressed("action") and action_timer.is_stopped():
+		interact(true)
+		action_timer.start(Inventory.current_tool.cooldown)
+		set_state(PlayerState.ACTION)
+	elif Input.is_action_just_pressed("build"):
+		enter_build_state()
+		set_state(PlayerState.BUILD)
 
 
 func action_state(delta) -> void:
+	velocity = Vector2.ZERO
+	anim_state.travel("idle") # anim_state.travel("action") 
+	
+	if action_timer.is_stopped():
+		set_state(PlayerState.MOVE)
+
+
+func interact_state(delta) -> void:
 	pass
+
+
+func enter_build_state() -> void:
+	var selector = ResourceManager.components["tile_selector"].instance()
+	var world = get_tree().current_scene
+	world.add_child(selector)
+
+
+func build_state(delta) -> void:
+	velocity = Vector2.ZERO
+	
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().current_scene.get_node("TileSelector").queue_free()
+		set_state(PlayerState.MOVE)
 
 
 func move() -> void:
@@ -132,3 +153,11 @@ func _on_item_dropped() -> void:
 
 		var world = get_tree().current_scene
 		world.get_node("YSort/Pickups").add_child(item)
+
+
+func set_state(next_state : int) -> void:
+	state = next_state
+
+
+func get_state() -> int:
+	return state

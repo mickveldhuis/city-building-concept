@@ -120,7 +120,7 @@ position = Vector2( 224, 128.132 )
 [node name="Rocks" type="YSort" parent="YSort"]
 
 [node name="Rock" parent="YSort/Rocks" instance=ExtResource( 6 )]
-position = Vector2( 424, 176.182 )
+position = Vector2( 408, 240.248 )
 
 [node name="Rock2" parent="YSort/Rocks" instance=ExtResource( 6 )]
 position = Vector2( 352, 280.289 )
@@ -129,4 +129,4 @@ position = Vector2( 352, 280.289 )
 position = Vector2( 48, 112.116 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 368, 112.116 )
+position = Vector2( 288, 224.231 )

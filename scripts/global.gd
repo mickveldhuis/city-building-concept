@@ -10,3 +10,10 @@ enum ItemType {
 	WOOD,
 	STONE,
 }
+enum BuildingType {
+	HOUSE,
+	INN,
+	BLACKSMITH,
+	GATHERER,
+	FISHERY,
+}
