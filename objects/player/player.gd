@@ -95,16 +95,16 @@ func interact_state(delta) -> void:
 
 
 func enter_build_state() -> void:
-	var selector = ResourceManager.components["tile_selector"].instance()
-	var world = get_tree().current_scene
-	world.add_child(selector)
+	get_tree().current_scene.get_node("Canvas/UI/BuildMenu").toggle_visibility()
 
 
 func build_state(delta) -> void:
 	velocity = Vector2.ZERO
+	anim_state.travel("idle")
 	
-	if Input.is_action_just_pressed("ui_cancel"):
-		get_tree().current_scene.get_node("TileSelector").queue_free()
+	
+	if Input.is_action_just_pressed("build"):
+		get_tree().current_scene.get_node("Canvas/UI/BuildMenu").toggle_visibility()
 		set_state(PlayerState.MOVE)
 
 

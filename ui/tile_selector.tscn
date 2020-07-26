@@ -14,6 +14,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="PlaceableSprite" type="Sprite" parent="."]
+self_modulate = Color( 1, 1, 1, 0.392157 )
+centered = false
+
 [node name="SelectorRect" type="NinePatchRect" parent="."]
 modulate = Color( 1, 1, 1, 0.588235 )
 margin_right = 16.0

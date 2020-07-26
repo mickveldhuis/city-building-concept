@@ -21,3 +21,4 @@ enum BuildingType {
 	GATHERER,
 	FISHERY,
 }
+const TILE_SIZE = 16

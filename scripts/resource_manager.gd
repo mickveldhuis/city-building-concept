@@ -4,7 +4,6 @@ onready var sprites = {
 	"mouse_default": preload("res://assets/ui/cursor.png"),
 	"selector_ok": preload("res://assets/ui/selector_green.png"),
 	"selector_error": preload("res://assets/ui/selector_red.png"),
-	"house": preload("res://assets/house.png"),
 }
 onready var components = {
 	"tile_selector": preload("res://ui/tile_selector.tscn"),
@@ -12,6 +11,14 @@ onready var components = {
 onready var placeables = {
 	"buildings": {
 		"house": preload("res://objects/buildings/house.tscn"),
+	},
+	"infrastructure": {
+		
+	},
+}
+onready var placeable_sprites = {
+	"buildings": {
+		"house": preload("res://assets/house.png"),
 	},
 	"infrastructure": {
 		

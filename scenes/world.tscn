@@ -57,11 +57,11 @@
 [node name="World" type="Node2D"]
 scale = Vector2( 1, 0.998968 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Canvas" type="CanvasLayer" parent="."]
 
-[node name="UI" parent="CanvasLayer" instance=ExtResource( 5 )]
+[node name="UI" parent="Canvas" instance=ExtResource( 5 )]
 
-[node name="MouseCursor" parent="CanvasLayer" instance=ExtResource( 7 )]
+[node name="MouseCursor" parent="Canvas" instance=ExtResource( 7 )]
 scale = Vector2( 1, 0.998968 )
 
 [node name="Ground" type="TileMap" parent="."]
