@@ -10,6 +10,10 @@ enum ItemType {
 	WOOD,
 	STONE,
 }
+enum PlaceableType {
+	BUILDING,
+	INFRASTRUCTURE,
+}
 enum BuildingType {
 	HOUSE,
 	INN,

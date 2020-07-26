@@ -18,10 +18,22 @@ _global_script_classes=[ {
 "class": "BaseTool",
 "language": "GDScript",
 "path": "res://scripts/resources/base_tool.gd"
+}, {
+"base": "Resource",
+"class": "Building",
+"language": "GDScript",
+"path": "res://scripts/resources/building.gd"
+}, {
+"base": "Resource",
+"class": "Placeable",
+"language": "GDScript",
+"path": "res://scripts/resources/placeable.gd"
 } ]
 _global_script_class_icons={
 "BaseItem": "",
-"BaseTool": ""
+"BaseTool": "",
+"Building": "",
+"Placeable": ""
 }
 
 [application]

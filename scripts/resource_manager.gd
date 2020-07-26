@@ -9,8 +9,13 @@ onready var sprites = {
 onready var components = {
 	"tile_selector": preload("res://ui/tile_selector.tscn"),
 }
-onready var objects = {
-#	"house": preload(),
+onready var placeables = {
+	"buildings": {
+		"house": preload("res://objects/buildings/house.tscn"),
+	},
+	"infrastructure": {
+		
+	},
 }
 onready var tools = {
 	Global.ToolType.AXE: preload("res://objects/inventory/tools/axe.tres"),
