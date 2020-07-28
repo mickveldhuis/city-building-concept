@@ -102,9 +102,8 @@ func build_state(delta) -> void:
 	velocity = Vector2.ZERO
 	anim_state.travel("idle")
 	
-	
 	if Input.is_action_just_pressed("build"):
-		get_tree().current_scene.get_node("Canvas/UI/BuildMenu").toggle_visibility()
+		get_tree().current_scene.get_node("Canvas/UI/BuildMenu").exit_build_menu()
 		set_state(PlayerState.MOVE)
 
 

@@ -9,16 +9,16 @@ onready var components = {
 	"tile_selector": preload("res://ui/tile_selector.tscn"),
 }
 onready var placeables = {
-	"buildings": {
-		"house": preload("res://objects/buildings/house.tscn"),
+	"houses": {
+		"wood": preload("res://objects/buildings/house.tscn"),
 	},
 	"infrastructure": {
 		
 	},
 }
 onready var placeable_sprites = {
-	"buildings": {
-		"house": preload("res://assets/house.png"),
+	"houses": {
+		"wood": preload("res://assets/house_wood.png"),
 	},
 	"infrastructure": {
 		

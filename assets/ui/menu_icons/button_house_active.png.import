@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/house.png-6449282ee59f246205314df37f9158ae.stex"
+path="res://.import/button_house_active.png-bd41b8aabad4e6bbae70e7bbea8d7e99.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/menu_icons/house.png"
-dest_files=[ "res://.import/house.png-6449282ee59f246205314df37f9158ae.stex" ]
+source_file="res://assets/ui/menu_icons/button_house_active.png"
+dest_files=[ "res://.import/button_house_active.png-bd41b8aabad4e6bbae70e7bbea8d7e99.stex" ]
 
 [params]
 

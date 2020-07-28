@@ -36,9 +36,8 @@ func drop_loot() -> void:
 
 
 func _on_hurtbox_hit(body : KinematicBody2D, dmg : int, type : int) -> void:
-	hit_sound.play()
-	
 	if type == Global.ToolType.AXE:
+		hit_sound.play()
 		hp -= dmg
 	
 	if hp <= 0:
