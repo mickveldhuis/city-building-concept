@@ -12,22 +12,22 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "BaseItem",
 "language": "GDScript",
-"path": "res://scripts/resources/base_item.gd"
+"path": "res://resources/base_item.gd"
 }, {
 "base": "Resource",
 "class": "BaseTool",
 "language": "GDScript",
-"path": "res://scripts/resources/base_tool.gd"
+"path": "res://resources/base_tool.gd"
 }, {
 "base": "Resource",
 "class": "Building",
 "language": "GDScript",
-"path": "res://scripts/resources/building.gd"
+"path": "res://resources/building.gd"
 }, {
 "base": "Resource",
 "class": "Placeable",
 "language": "GDScript",
-"path": "res://scripts/resources/placeable.gd"
+"path": "res://resources/placeable.gd"
 } ]
 _global_script_class_icons={
 "BaseItem": "",

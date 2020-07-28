@@ -1,6 +1,7 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
-[ext_resource path="res://scripts/resources/building.gd" type="Script" id=1]
+[ext_resource path="res://resources/building.gd" type="Script" id=1]
+
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/house.png-873b23dab4701b230309b6eed0085474.stex"

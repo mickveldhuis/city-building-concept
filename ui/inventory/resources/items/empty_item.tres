@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
-[ext_resource path="res://scripts/resources/base_item.gd" type="Script" id=1]
+[ext_resource path="res://resources/base_item.gd" type="Script" id=1]
 [ext_resource path="res://ui/inventory/assets/empty_icon.png" type="Texture" id=2]
 
 [resource]

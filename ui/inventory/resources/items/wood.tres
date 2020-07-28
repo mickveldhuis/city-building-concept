@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=4 format=2]
 
 [ext_resource path="res://entities/scenery/assets/log.png" type="Texture" id=1]
-[ext_resource path="res://scripts/resources/base_item.gd" type="Script" id=2]
+[ext_resource path="res://resources/base_item.gd" type="Script" id=2]
 [ext_resource path="res://ui/inventory/assets/wood_icon.png" type="Texture" id=3]
 
 [resource]
