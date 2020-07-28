@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/build_menu/tile_selector.gd" type="Script" id=1]
+[ext_resource path="res://ui/build_menu/assets/selector_green.png" type="Texture" id=2]
+
+
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[node name="TileSelector" type="Control"]
+margin_right = 16.0
+margin_bottom = 16.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlaceableSprite" type="Sprite" parent="."]
+self_modulate = Color( 1, 1, 1, 0.392157 )
+centered = false
+
+[node name="SelectorRect" type="NinePatchRect" parent="."]
+modulate = Color( 1, 1, 1, 0.588235 )
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 16, 16 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Area2D" type="Area2D" parent="SelectorRect"]
+monitorable = false
+collision_layer = 0
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectorRect/Area2D"]
+position = Vector2( 8, 8 )
+shape = SubResource( 1 )

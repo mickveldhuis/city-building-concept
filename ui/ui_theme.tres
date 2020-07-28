@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=8 format=2]
 
-[ext_resource path="res://assets/fonts/dogica/dogica.otf" type="DynamicFontData" id=1]
-[ext_resource path="res://assets/ui/inventory_slot.png" type="Texture" id=2]
+[ext_resource path="res://ui/common_assets/fonts/dogica/dogica.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://ui/inventory/assets/inventory_slot.png" type="Texture" id=2]
 
 [sub_resource type="DynamicFont" id=1]
 size = 7

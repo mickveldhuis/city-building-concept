@@ -39,13 +39,13 @@ _global_script_class_icons={
 [application]
 
 config/name="city-building-concept"
-run/main_scene="res://scenes/world.tscn"
+run/main_scene="res://scenes/world/world.tscn"
 
 [autoload]
 
-Global="*res://scripts/global.gd"
-ResourceManager="*res://scripts/resource_manager.gd"
-Inventory="*res://scripts/inventory.gd"
+Global="*res://autoloads/global.gd"
+ResourceManager="*res://autoloads/resource_manager.gd"
+Inventory="*res://autoloads/inventory.gd"
 
 [display]
 
