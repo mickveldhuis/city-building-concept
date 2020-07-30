@@ -9,11 +9,11 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 2 )
-region_rect = Rect2( 0, 0, 32, 32 )
+region_rect = Rect2( 0, 0, 26, 26 )
 margin_left = 3.11487
-margin_right = 3.08429
-margin_top = 2.95578
-margin_bottom = 3.2128
+margin_right = 3.13947
+margin_top = 3.2128
+margin_bottom = 3.15335
 
 [sub_resource type="DynamicFont" id=3]
 size = 3

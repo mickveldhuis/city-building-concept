@@ -6,12 +6,6 @@
 [ext_resource path="res://ui/inventory/inventory_ui.gd" type="Script" id=4]
 [ext_resource path="res://ui/ui_theme.tres" type="Theme" id=5]
 
-
-
-
-
-
-
 [node name="Inventory" type="HBoxContainer"]
 margin_right = 54.0
 margin_bottom = 26.0

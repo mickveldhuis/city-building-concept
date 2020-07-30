@@ -1,10 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://ui/ui_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/inventory/inventory.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/stats_bar/stats_bar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/build_menu/build_menu.tscn" type="PackedScene" id=4]
-
-
 
 [node name="UI" type="Control"]
 anchor_right = 1.0
@@ -39,3 +38,5 @@ margin_left = 213.0
 margin_top = 2.0
 margin_right = 267.0
 margin_bottom = 28.0
+
+[node name="TopContainer" parent="." instance=ExtResource( 3 )]

@@ -33,6 +33,7 @@ custom_constants/separation = 2
 alignment = 2
 
 [node name="Menu" type="HBoxContainer" parent="Categories/Houses"]
+visible = false
 margin_right = 54.0
 margin_bottom = 26.0
 custom_constants/separation = 2

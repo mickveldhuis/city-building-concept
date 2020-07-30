@@ -1,6 +1,8 @@
 extends Node
 
 
+signal world_data_updated
+
 var item_supply = {
 	Global.ItemType.WOOD: 0,
 	Global.ItemType.STONE: 0,
@@ -15,6 +17,8 @@ func modify_supply(type : int, amount : int) -> void:
 	else:
 		item_supply[type] = 0
 		push_error("The supply is negative!!!")
+	
+	emit_signal("world_data_updated")
 
 
 func take_from_supply(type : int, amount : int) -> int:
@@ -25,4 +29,5 @@ func take_from_supply(type : int, amount : int) -> int:
 		return item_supply[type]
 	
 	modify_supply(type, -amount)
+	emit_signal("world_data_updated")
 	return amount
