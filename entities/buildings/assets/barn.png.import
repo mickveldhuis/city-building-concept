@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cursor.png-7ff3331547e0c0ed7a416a8b1ba3bb7a.stex"
+path="res://.import/barn.png-2a3b4aea1ff6f4d3800f7ef760bcf4c1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/common_assets/cursor.png"
-dest_files=[ "res://.import/cursor.png-7ff3331547e0c0ed7a416a8b1ba3bb7a.stex" ]
+source_file="res://entities/buildings/assets/barn.png"
+dest_files=[ "res://.import/barn.png-2a3b4aea1ff6f4d3800f7ef760bcf4c1.stex" ]
 
 [params]
 

@@ -46,6 +46,7 @@ run/main_scene="res://scenes/world/world.tscn"
 Global="*res://autoloads/global.gd"
 ResourceManager="*res://autoloads/resource_manager.gd"
 Inventory="*res://autoloads/inventory.gd"
+WorldData="*res://autoloads/world_data.gd"
 
 [display]
 
@@ -189,6 +190,7 @@ build={
 2d_physics/layer_1="player"
 2d_physics/layer_2="world"
 2d_physics/layer_3="interactables"
+2d_physics/layer_4="selectables"
 
 [rendering]
 

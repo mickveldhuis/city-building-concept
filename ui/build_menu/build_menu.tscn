@@ -8,13 +8,6 @@
 [ext_resource path="res://ui/build_menu/assets/button_infra_active.png" type="Texture" id=6]
 [ext_resource path="res://ui/build_menu/assets/button_infra.png" type="Texture" id=7]
 
-
-
-
-
-
-
-
 [node name="BuildMenu" type="MarginContainer"]
 anchor_left = 1.0
 anchor_top = 0.5
@@ -40,7 +33,6 @@ custom_constants/separation = 2
 alignment = 2
 
 [node name="Menu" type="HBoxContainer" parent="Categories/Houses"]
-visible = false
 margin_right = 54.0
 margin_bottom = 26.0
 custom_constants/separation = 2
@@ -49,8 +41,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WoodenHouse" type="TextureButton" parent="Categories/Houses/Menu"]
+[node name="Barn" type="TextureButton" parent="Categories/Houses/Menu"]
 margin_right = 26.0
+margin_bottom = 26.0
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 1 )
+texture_hover = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WoodenHouse" type="TextureButton" parent="Categories/Houses/Menu"]
+margin_left = 28.0
+margin_right = 54.0
 margin_bottom = 26.0
 texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 1 )
@@ -100,6 +103,7 @@ toggle_mode = true
 texture_normal = ExtResource( 7 )
 texture_pressed = ExtResource( 6 )
 texture_hover = ExtResource( 6 )
+[connection signal="button_up" from="Categories/Houses/Menu/Barn" to="." method="_on_barn_button_up"]
 [connection signal="button_up" from="Categories/Houses/Menu/WoodenHouse" to="." method="_on_wooden_house_button_up"]
 [connection signal="toggled" from="Categories/Houses/Toggle" to="." method="_on_houses_btn_toggled"]
 [connection signal="button_up" from="Categories/Infrastructure/Menu/DirtRoad" to="." method="_on_dirt_road_button_up"]

@@ -1,7 +1,7 @@
 extends Node
 
 onready var sprites = {
-	"mouse_default": preload("res://ui/common_assets/cursor.png"),
+	"mouse_default": preload("res://ui/mouse/assets/cursor.png"),
 	"selector_ok": preload("res://ui/build_menu/assets/selector_green.png"),
 	"selector_error": preload("res://ui/build_menu/assets/selector_red.png"),
 }
@@ -9,6 +9,9 @@ onready var components = {
 	"tile_selector": preload("res://ui/build_menu/tile_selector.tscn"),
 }
 onready var placeables = {
+	"buildings": {
+		"barn": preload("res://entities/buildings/barn.tscn"),
+	},
 	"houses": {
 		"wood": preload("res://entities/buildings/house.tscn"),
 	},
@@ -17,6 +20,9 @@ onready var placeables = {
 	},
 }
 onready var placeable_sprites = {
+	"buildings": {
+		"barn": preload("res://entities/buildings/assets/barn.png"),
+	},
 	"houses": {
 		"wood": preload("res://entities/buildings/assets/house_wood.png"),
 	},

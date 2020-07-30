@@ -25,7 +25,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	move_rect(get_global_mouse_position())
-	
+
+
+func _physics_process(delta: float) -> void:
 	if area.get_overlapping_areas().empty() and area.get_overlapping_bodies().empty():
 		selector_rect.texture = ResourceManager.sprites["selector_ok"]
 		state = SelectorState.CLEAR
@@ -67,8 +69,9 @@ func get_location() -> Vector2:
 
 
 func set_placeable(cat : String, subcat : String) -> void:
-	size = Vector2(3, 3)
 	placeable_texture = ResourceManager.placeable_sprites[cat][subcat]
+	size = placeable_texture.get_size() / Global.TILE_SIZE
+	
 	placeable_data.cat = cat
 	placeable_data.subcat = subcat
 

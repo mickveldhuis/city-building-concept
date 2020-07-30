@@ -20,5 +20,6 @@ enum BuildingType {
 	BLACKSMITH,
 	GATHERER,
 	FISHERY,
+	BARN,
 }
 const TILE_SIZE = 16

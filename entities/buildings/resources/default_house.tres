@@ -1,15 +1,10 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=2 format=2]
 
 [ext_resource path="res://resources/building.gd" type="Script" id=1]
-
-
-[sub_resource type="StreamTexture" id=1]
-load_path = "res://.import/house.png-873b23dab4701b230309b6eed0085474.stex"
 
 [resource]
 script = ExtResource( 1 )
 name = "house"
 description = "a simple house"
 building_type = 0
-sprite = SubResource( 1 )
 size = Vector2( 3, 3 )

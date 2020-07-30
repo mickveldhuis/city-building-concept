@@ -130,3 +130,7 @@ func _on_wooden_house_button_up() -> void:
 func _on_dirt_road_button_up() -> void:
 #	instantiate_selector_for("infrastructure", "dirt_road")
 	print("Place dirt road")
+
+
+func _on_barn_button_up() -> void:
+	instantiate_selector_for("buildings", "barn")

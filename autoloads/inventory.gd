@@ -23,11 +23,14 @@ func modify_item_count_by(n : int) -> void:
 	emit_signal("item_count_modified")
 
 
-func drop_items() -> void:
-	emit_signal("item_dropped")
-	
+func empty_inventory() -> void:
 	current_item.amount = 0
 	set_item(Global.ItemType.EMPTY)	
+
+
+func drop_items() -> void:
+	emit_signal("item_dropped")
+	empty_inventory()
 
 
 func swap_tool() -> void:
