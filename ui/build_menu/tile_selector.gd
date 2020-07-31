@@ -7,6 +7,8 @@ enum SelectorState {
 }
 
 var state : int = SelectorState.CLEAR
+var n_entered : int = 0 # How many bodies/areas have entered the tileselector
+
 var size : Vector2 = Vector2(1, 1) # Size in units of 16 pixels
 var placeable_texture : Texture = null
 var placeable_data : Dictionary = {
@@ -25,15 +27,13 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	move_rect(get_global_mouse_position())
-
-
-func _physics_process(delta: float) -> void:
-	if area.get_overlapping_areas().empty() and area.get_overlapping_bodies().empty():
-		selector_rect.texture = ResourceManager.sprites["selector_ok"]
-		state = SelectorState.CLEAR
-	else:
+	
+	if n_entered > 0:
 		selector_rect.texture = ResourceManager.sprites["selector_error"]
 		state = SelectorState.BLOCKED
+	else:
+		selector_rect.texture = ResourceManager.sprites["selector_ok"]
+		state = SelectorState.CLEAR
 
 
 func move_rect(pos : Vector2) -> void:
@@ -96,3 +96,19 @@ func init_selector() -> void:
 
 func is_blocked() -> bool:
 	return state == SelectorState.BLOCKED
+
+
+func _on_area_entered(area: Area2D) -> void:
+	n_entered += 1
+
+
+func _on_area_exited(area: Area2D) -> void:
+	n_entered -= 1
+
+
+func _on_body_entered(body: Node) -> void:
+	n_entered += 1
+
+
+func _on_body_exited(body: Node) -> void:
+	n_entered -= 1
