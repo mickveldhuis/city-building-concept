@@ -28,12 +28,18 @@ _global_script_classes=[ {
 "class": "Placeable",
 "language": "GDScript",
 "path": "res://resources/placeable.gd"
+}, {
+"base": "Node",
+"class": "WorldMap",
+"language": "GDScript",
+"path": "res://world_map.gd"
 } ]
 _global_script_class_icons={
 "BaseItem": "",
 "BaseTool": "",
 "Building": "",
-"Placeable": ""
+"Placeable": "",
+"WorldMap": ""
 }
 
 [application]
@@ -47,6 +53,10 @@ Global="*res://autoloads/global.gd"
 ResourceManager="*res://autoloads/resource_manager.gd"
 Inventory="*res://autoloads/inventory.gd"
 WorldData="*res://autoloads/world_data.gd"
+
+[debug]
+
+gdscript/warnings/integer_division=false
 
 [display]
 

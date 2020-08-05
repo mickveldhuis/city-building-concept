@@ -31,13 +31,13 @@ func _process(delta: float) -> void:
 		free_selector()
 
 
-func instantiate_selector_for(cat : String, subcat : String) -> void:
+func instantiate_selector_for(entity : int) -> void:
 	if not selector_active:
 		toggle_disability_current_menu()
 		selector_active = true
 		
 		var selector = ResourceManager.components["tile_selector"].instance()
-		selector.set_placeable(cat, subcat)
+		selector.set_placeable(entity)
 		
 		var world = get_tree().current_scene
 		world.add_child(selector)
@@ -56,7 +56,7 @@ func place_object() -> void:
 	var data : Dictionary = ts.placeable_data
 	
 	if not ts.is_blocked():
-		var object = ResourceManager.placeables[data.cat][data.subcat].instance()
+		var object = ResourceManager.placeables[data.entity].instance()
 		object.set_position(location + object.get_left_corner_position())
 		
 		var world = get_tree().current_scene
@@ -124,13 +124,13 @@ func _on_infra_btn_toggled(button_pressed: bool) -> void:
 
 
 func _on_wooden_house_button_up() -> void:
-	instantiate_selector_for("houses", "wood")
+	instantiate_selector_for(Global.EntityType.HOUSE)
 
 
 func _on_dirt_road_button_up() -> void:
-#	instantiate_selector_for("infrastructure", "dirt_road")
+#	instantiate_selector_for(Global.EntityType.ROAD)
 	print("Place dirt road")
 
 
 func _on_barn_button_up() -> void:
-	instantiate_selector_for("buildings", "barn")
+	instantiate_selector_for(Global.EntityType.BARN)

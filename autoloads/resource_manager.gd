@@ -9,26 +9,12 @@ onready var components = {
 	"tile_selector": preload("res://ui/build_menu/tile_selector.tscn"),
 }
 onready var placeables = {
-	"buildings": {
-		"barn": preload("res://entities/buildings/barn.tscn"),
-	},
-	"houses": {
-		"wood": preload("res://entities/buildings/house.tscn"),
-	},
-	"infrastructure": {
-		
-	},
+	Global.EntityType.BARN:preload("res://entities/buildings/barn.tscn"),
+	Global.EntityType.HOUSE: preload("res://entities/buildings/house.tscn"),
 }
 onready var placeable_sprites = {
-	"buildings": {
-		"barn": preload("res://entities/buildings/assets/barn.png"),
-	},
-	"houses": {
-		"wood": preload("res://entities/buildings/assets/house_wood.png"),
-	},
-	"infrastructure": {
-		
-	},
+	Global.EntityType.BARN: preload("res://entities/buildings/assets/barn.png"),
+	Global.EntityType.HOUSE: preload("res://entities/buildings/assets/house.png"),
 }
 onready var tools = {
 	Global.ToolType.AXE: preload("res://ui/inventory/resources/tools/axe.tres"),
