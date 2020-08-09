@@ -55,14 +55,16 @@ func place_object() -> void:
 	var location : Vector2 = ts.get_location()
 	var data : Dictionary = ts.placeable_data
 	
-	if not ts.is_blocked():
-		var object = ResourceManager.placeables[data.entity].instance()
-		var loc_offset : Vector2 = object.get_left_corner_position() - Vector2(0, data.delta_y)
-		
-		object.set_position(location + loc_offset)
-		
-		var world = get_tree().current_scene
-		world.get_node("YSort/Placeables").add_child(object)
+	ConstructionManager.build(location, data.entity)
+	
+#	if not ts.is_blocked():
+#		var object = ResourceManager.placeables[data.entity].instance()
+#		var loc_offset : Vector2 = object.get_left_corner_position() - Vector2(0, data.delta_y)
+#
+#		object.set_position(location + loc_offset)
+#
+#		var world = get_tree().current_scene
+#		world.get_node("YSort/Placeables").add_child(object)
 
 
 func toggle_visibility() -> void:

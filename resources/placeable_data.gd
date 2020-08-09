@@ -10,3 +10,7 @@ export(Global.EntityType) var entity_id = Global.EntityType.EMPTY
 export(Vector2) var size = Vector2.ZERO
 export(Vector2) var base_extent = Vector2.ZERO
 export(Texture) var sprite = null
+
+
+func get_delta_y() -> int:
+	return int(abs(size.y - base_extent.y)) * Global.TILE_SIZE

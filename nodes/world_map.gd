@@ -3,14 +3,20 @@ extends Node
 class_name WorldMap
 
 
-export(int) var width = 5 #40 # Width in number of tiles
-export(int) var height = 4 #25 # Height in number of tiles
+signal map_updated
+
+export(int) var width = 40 # Width in number of tiles
+export(int) var height = 25 # Height in number of tiles
 export(int) var tile_size = Global.TILE_SIZE
 
 var map : Array # 2D array of tiles
 
 const TILE_DIRECTIONS : Array = ["left", "right", "top", "bottom"]
 
+enum Error {
+	OK,
+	FAILED,
+}
 
 class Tile:
 	var is_unique : bool
@@ -72,18 +78,18 @@ class Tile:
 
 func _ready() -> void:
 	_init_map_matrix()
-	set_cell(2, 2, Global.EntityType.HOUSE, {left = false, right = true, 
-											 top = false, bottom = true})
-	set_cell(3, 2, Global.EntityType.HOUSE, {left = true, right = false, 
-											 top = false, bottom = true})
-	set_cell(2, 3, Global.EntityType.HOUSE, {left = false, right = true, 
-											 top = true, bottom = false})
-	set_cell(3, 3, Global.EntityType.HOUSE, {left = true, right = false, 
-											 top = true, bottom = false})
-	_print_map()
-	set_cell_group(1, 1, Global.EntityType.FARM, Vector2(3, 3))
-	#reset_cell(2, 2)
-	_print_map()
+#	set_cell(2, 2, Global.EntityType.HOUSE, {left = false, right = true, 
+#											 top = false, bottom = true})
+#	set_cell(3, 2, Global.EntityType.HOUSE, {left = true, right = false, 
+#											 top = false, bottom = true})
+#	set_cell(2, 3, Global.EntityType.HOUSE, {left = false, right = true, 
+#											 top = true, bottom = false})
+#	set_cell(3, 3, Global.EntityType.HOUSE, {left = true, right = false, 
+#											 top = true, bottom = false})
+#	_print_map()
+#	set_cell_group(1, 1, Global.EntityType.FARM, Vector2(3, 3))
+#	#reset_cell(2, 2)
+#	_print_map()
 
 
 func _init_map_matrix():
@@ -137,7 +143,7 @@ func world_to_map(world_pos : Vector2) -> Vector2:
 	return map_pos
 
 
-func set_cell(x : int, y : int, tile_type : int, neighbor_info : Dictionary = {}) -> void:
+func set_cell(x : int, y : int, tile_type : int, neighbor_info : Dictionary = {}) -> int:
 	if tile_type != Global.EntityType.EMPTY and not (tile_type in Global.STATELESS_ENTITIES):
 		var new_tile : Tile = Tile.new(tile_type, Vector2(x, y), true)
 		
@@ -146,6 +152,8 @@ func set_cell(x : int, y : int, tile_type : int, neighbor_info : Dictionary = {}
 								neighbor_info.top, neighbor_info.bottom)
 		
 		map[x][y] = new_tile
+		
+		return Error.OK
 	elif tile_type != Global.EntityType.EMPTY:
 		var new_tile : Tile = Tile.new(tile_type, Vector2(x, y), false)
 		
@@ -154,21 +162,19 @@ func set_cell(x : int, y : int, tile_type : int, neighbor_info : Dictionary = {}
 								neighbor_info.top, neighbor_info.bottom)
 		
 		map[x][y] = new_tile
+		
+		return Error.OK
+	
+	return Error.FAILED
 
 
-func set_cell_group(x : int, y : int, tile_type : int, group_extent : Vector2 = Vector2.ONE) -> void:
+func set_cell_group(x : int, y : int, tile_type : int, group_extent : Vector2 = Vector2.ONE) -> int:
 	var _end_pos : Vector2 = Vector2(x, y) + group_extent - Vector2.ONE
 	
 	# Check whether the tile group can be placed, note the minus 1 in the last statement
 	# is to correct for the extent of the group
 	if tile_type != Global.EntityType.EMPTY and _is_cell_empty(x, y) and _is_within_bounds(x, y) and _is_within_bounds(_end_pos.x, _end_pos.y):
-		var _is_blocked : bool = false
-		
-		for i in range(x, x + group_extent.x):
-			for j in range(y, y + group_extent.y):
-				_is_blocked = _is_blocked or not _is_cell_empty(i, j)
-		
-		if not _is_blocked:
+		if not are_cells_empty(x, y, group_extent.x, group_extent.y):
 			if group_extent == Vector2.ONE:
 				set_cell(x, y, tile_type)
 			else:
@@ -178,15 +184,29 @@ func set_cell_group(x : int, y : int, tile_type : int, group_extent : Vector2 = 
 				var dir_b : bool = false
 				
 				for i in range(x, _end_pos.x + 1):
-					dir_l = true if i > x else false 
+					dir_l = true if i > x else false
 					dir_r = true if i < _end_pos.x else false
 					
 					for j in range(y, _end_pos.y + 1):
 						dir_t = true if j > y else false 
 						dir_b = true if j < _end_pos.y else false
 						
-						set_cell(i, j, tile_type, {left = dir_l, right = dir_r, 
-												   top = dir_t, bottom = dir_b})
+						var _err : int = set_cell(i, j, tile_type, {left = dir_l, 
+										right = dir_r, top = dir_t, bottom = dir_b})
+			
+			emit_signal("map_updated")
+			return Error.OK
+	
+	return Error.FAILED
+
+func are_cells_empty(x : int, y : int, w : int, h : int) -> bool:
+	var _is_blocked : bool = false
+	
+	for i in range(x, x + w):
+		for j in range(y, y + h):
+			_is_blocked = _is_blocked or not _is_cell_empty(i, j)
+	
+	return _is_blocked
 
 
 func reset_cell(x : int, y : int) -> void:
@@ -194,7 +214,7 @@ func reset_cell(x : int, y : int) -> void:
 		# Get in which direction the tile has neighbors of a tile group (i.e. a house)
 		var dirs : Dictionary = map[x][y].get_group_neighbors()
 		
-		# Delete the current cell
+		# Delete the current cell, i.e. change the cell to an empty one
 		map[x][y] = Tile.new(Global.EntityType.EMPTY, Vector2(x, y))
 		
 		if dirs.left:

@@ -53,9 +53,11 @@ Global="*res://autoloads/global.gd"
 ResourceManager="*res://autoloads/resource_manager.gd"
 Inventory="*res://autoloads/inventory.gd"
 WorldData="*res://autoloads/world_data.gd"
+ConstructionManager="*res://autoloads/construction_manager.gd"
 
 [debug]
 
+gdscript/warnings/narrowing_conversion=false
 gdscript/warnings/integer_division=false
 
 [display]

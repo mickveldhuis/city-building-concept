@@ -1,10 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://ui/build_menu/tile_selector.gd" type="Script" id=1]
 [ext_resource path="res://ui/build_menu/assets/selector_green.png" type="Texture" id=2]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7, 7 )
 
 [node name="TileSelector" type="Control"]
 margin_right = 16.0
@@ -14,9 +11,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlaceableSprite" type="Sprite" parent="."]
+[node name="PlaceableRect" type="TextureRect" parent="."]
 self_modulate = Color( 1, 1, 1, 0.392157 )
-centered = false
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="SelectorRect" type="NinePatchRect" parent="."]
 modulate = Color( 1, 1, 1, 0.588235 )
@@ -32,16 +33,3 @@ patch_margin_bottom = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Area2D" type="Area2D" parent="SelectorRect"]
-monitorable = false
-collision_layer = 0
-collision_mask = 7
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectorRect/Area2D"]
-position = Vector2( 8, 8 )
-shape = SubResource( 1 )
-[connection signal="area_entered" from="SelectorRect/Area2D" to="." method="_on_area_entered"]
-[connection signal="area_exited" from="SelectorRect/Area2D" to="." method="_on_area_exited"]
-[connection signal="body_entered" from="SelectorRect/Area2D" to="." method="_on_body_entered"]
-[connection signal="body_exited" from="SelectorRect/Area2D" to="." method="_on_body_exited"]

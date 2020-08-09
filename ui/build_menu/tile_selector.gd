@@ -7,8 +7,6 @@ enum SelectorState {
 }
 
 var state : int = SelectorState.CLEAR
-var n_entered : int = 0 # How many bodies/areas have entered the tileselector
-
 var size : Vector2 = Vector2(1, 1) # Size in units of 16 pixels
 var placeable_texture : Texture = null
 var placeable_data : Dictionary = {
@@ -19,18 +17,24 @@ var placeable_data : Dictionary = {
 }
 
 onready var selector_rect : NinePatchRect = $SelectorRect
-onready var area : Area2D = $SelectorRect/Area2D
-onready var collision_shape : CollisionShape2D = $SelectorRect/Area2D/CollisionShape2D
-onready var placeable_sprite : Sprite = $PlaceableSprite
+onready var placeable_rect : TextureRect = $PlaceableRect
+
 
 func _ready() -> void:
 	init_selector()
 
 
-func _process(delta: float) -> void:
-	move_rect(get_global_mouse_position())
+func _process(_delta: float) -> void:
+	_move_rect(get_global_mouse_position())
+	_update_selector_state()
+
+
+func _update_selector_state() -> void:
+	var tile_pos : Vector2  = ConstructionManager.map.world_to_map(rect_position)
+	var is_blocked : bool = ConstructionManager.map.are_cells_empty(tile_pos.x, 
+			tile_pos.y, placeable_data.base_extent.x, placeable_data.base_extent.y)
 	
-	if n_entered > 0:
+	if is_blocked:
 		selector_rect.texture = ResourceManager.sprites["selector_error"]
 		state = SelectorState.BLOCKED
 	else:
@@ -38,7 +42,7 @@ func _process(delta: float) -> void:
 		state = SelectorState.CLEAR
 
 
-func move_rect(pos : Vector2) -> void:
+func _move_rect(pos : Vector2) -> void:
 	var remainder_x : int = int(fmod(pos.x, Global.TILE_SIZE))
 	var remainder_y : int = int(fmod(pos.y, Global.TILE_SIZE))
 	
@@ -49,21 +53,13 @@ func move_rect(pos : Vector2) -> void:
 func update_rect_size() -> void:
 	if Input.is_action_just_pressed("ui_right"):
 		selector_rect.rect_size.x += Global.TILE_SIZE
-		collision_shape.position.x += Global.TILE_SIZE / 2
-		collision_shape.scale.x += 1
 	if Input.is_action_just_pressed("ui_left") and selector_rect.rect_size.x > 16:
 		selector_rect.rect_size.x -= Global.TILE_SIZE
-		collision_shape.position.x -= Global.TILE_SIZE / 2
-		collision_shape.scale.x -= 1
 
 	if Input.is_action_just_pressed("ui_down"):
 		selector_rect.rect_size.y += Global.TILE_SIZE
-		collision_shape.position.y += Global.TILE_SIZE / 2
-		collision_shape.scale.y += 1
 	if Input.is_action_just_pressed("ui_up") and selector_rect.rect_size.y > 16:
 		selector_rect.rect_size.y -= Global.TILE_SIZE
-		collision_shape.position.y -= Global.TILE_SIZE / 2
-		collision_shape.scale.y -= 1
 
 
 func get_location() -> Vector2:
@@ -84,39 +80,15 @@ func set_placeable(entity : int) -> void:
 
 
 func init_selector() -> void:
-	var w : int = size.x * Global.TILE_SIZE
-	var h : int = size.y * Global.TILE_SIZE
+	var base_size : Vector2 = ConstructionManager.map.map_to_world(size)
 	
-	selector_rect.rect_size.x = w
-	collision_shape.position.x = w / 2
-	collision_shape.scale.x = size.x
-	
-	selector_rect.rect_size.y = h
-	collision_shape.position.y = h / 2
-	collision_shape.scale.y = size.y
-	
+	selector_rect.rect_size = base_size
 	rect_position = get_global_mouse_position()
 	
 	if placeable_texture:
-		placeable_sprite.texture = placeable_texture
-		placeable_sprite.position.y -= placeable_data.delta_y
+		placeable_rect.texture = placeable_texture
+		placeable_rect.rect_position.y -= placeable_data.delta_y
 
 
 func is_blocked() -> bool:
 	return state == SelectorState.BLOCKED
-
-
-func _on_area_entered(area: Area2D) -> void:
-	n_entered += 1
-
-
-func _on_area_exited(area: Area2D) -> void:
-	n_entered -= 1
-
-
-func _on_body_entered(body: Node) -> void:
-	n_entered += 1
-
-
-func _on_body_exited(body: Node) -> void:
-	n_entered -= 1
