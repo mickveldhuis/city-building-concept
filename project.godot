@@ -25,20 +25,20 @@ _global_script_classes=[ {
 "path": "res://resources/building.gd"
 }, {
 "base": "Resource",
-"class": "Placeable",
+"class": "PlaceableData",
 "language": "GDScript",
-"path": "res://resources/placeable.gd"
+"path": "res://resources/placeable_data.gd"
 }, {
 "base": "Node",
 "class": "WorldMap",
 "language": "GDScript",
-"path": "res://world_map.gd"
+"path": "res://nodes/world_map.gd"
 } ]
 _global_script_class_icons={
 "BaseItem": "",
 "BaseTool": "",
 "Building": "",
-"Placeable": "",
+"PlaceableData": "",
 "WorldMap": ""
 }
 

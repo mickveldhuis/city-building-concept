@@ -57,7 +57,9 @@ func place_object() -> void:
 	
 	if not ts.is_blocked():
 		var object = ResourceManager.placeables[data.entity].instance()
-		object.set_position(location + object.get_left_corner_position())
+		var loc_offset : Vector2 = object.get_left_corner_position() - Vector2(0, data.delta_y)
+		
+		object.set_position(location + loc_offset)
 		
 		var world = get_tree().current_scene
 		world.get_node("YSort/Placeables").add_child(object)

@@ -12,7 +12,10 @@ var n_entered : int = 0 # How many bodies/areas have entered the tileselector
 var size : Vector2 = Vector2(1, 1) # Size in units of 16 pixels
 var placeable_texture : Texture = null
 var placeable_data : Dictionary = {
-	entity = null
+	entity = null,
+	base_extent = null,
+	size = null,
+	delta_y = null,
 }
 
 onready var selector_rect : NinePatchRect = $SelectorRect
@@ -68,10 +71,16 @@ func get_location() -> Vector2:
 
 
 func set_placeable(entity : int) -> void:
-	placeable_texture = ResourceManager.placeable_sprites[entity]
-	size = placeable_texture.get_size() / Global.TILE_SIZE
+	var _data : Resource = ResourceManager.placeable_resources[entity]
 	
 	placeable_data.entity = entity
+	placeable_data.base_extent = _data.base_extent
+	placeable_data.size = _data.size
+	placeable_data.delta_y = Global.TILE_SIZE * int(abs(_data.size.y - _data.base_extent.y))
+	
+	placeable_texture = ResourceManager.placeable_sprites[entity]
+	size = _data.base_extent
+	
 
 
 func init_selector() -> void:
@@ -90,6 +99,7 @@ func init_selector() -> void:
 	
 	if placeable_texture:
 		placeable_sprite.texture = placeable_texture
+		placeable_sprite.position.y -= placeable_data.delta_y
 
 
 func is_blocked() -> bool:

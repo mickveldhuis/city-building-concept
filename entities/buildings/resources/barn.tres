@@ -1,10 +1,14 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="Resource" load_steps=3 format=2]
 
-[ext_resource path="res://resources/placeable.gd" type="Script" id=1]
+[ext_resource path="res://resources/placeable_data.gd" type="Script" id=1]
+[ext_resource path="res://entities/buildings/assets/barn.png" type="Texture" id=2]
 
 [resource]
 script = ExtResource( 1 )
 name = "barn"
-description = "a place where you can store your goods"
+description = "here you can store your goods"
 type = 0
+entity_id = 9
 size = Vector2( 4, 5 )
+base_extent = Vector2( 4, 3 )
+sprite = ExtResource( 2 )

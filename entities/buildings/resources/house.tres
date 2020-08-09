@@ -1,12 +1,14 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
-[ext_resource path="res://entities/buildings/assets/house.png" type="Texture" id=1]
-[ext_resource path="res://resources/building.gd" type="Script" id=2]
+[ext_resource path="res://resources/placeable_data.gd" type="Script" id=1]
+[ext_resource path="res://entities/buildings/assets/house.png" type="Texture" id=2]
 
 [resource]
-script = ExtResource( 2 )
-name = "wooden house"
-description = "a simple wooden house"
-building_type = 0
-sprite = ExtResource( 1 )
+script = ExtResource( 1 )
+name = "house"
+description = "a simpel wooden housea building"
+type = 0
+entity_id = 4
 size = Vector2( 3, 3 )
+base_extent = Vector2( 3, 2 )
+sprite = ExtResource( 2 )

@@ -12,6 +12,10 @@ onready var placeables = {
 	Global.EntityType.BARN:preload("res://entities/buildings/barn.tscn"),
 	Global.EntityType.HOUSE: preload("res://entities/buildings/house.tscn"),
 }
+onready var placeable_resources = {
+	Global.EntityType.BARN:preload("res://entities/buildings/resources/barn.tres"),
+	Global.EntityType.HOUSE: preload("res://entities/buildings/resources/house.tres"),
+}
 onready var placeable_sprites = {
 	Global.EntityType.BARN: preload("res://entities/buildings/assets/barn.png"),
 	Global.EntityType.HOUSE: preload("res://entities/buildings/assets/house.png"),
