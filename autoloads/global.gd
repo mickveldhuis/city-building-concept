@@ -1,5 +1,9 @@
 extends Node
 
+
+signal enable_mouse_action(entity)
+signal disable_mouse_action(entity)
+
 enum ToolType {
 	AXE,
 	PICKAXE,
@@ -39,5 +43,6 @@ enum EntityType {
 	BARN,
 	FARM,
 }
+
 const TILE_SIZE = 16
 const STATELESS_ENTITIES = [EntityType.TREE, EntityType.ROCK, EntityType.ROAD]

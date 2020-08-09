@@ -42,3 +42,11 @@ func _on_hurtbox_hit(body : KinematicBody2D, dmg : int, type : int) -> void:
 	
 	if hp <= 0:
 		anim_player.play("death", 2)
+
+
+func _on_mouse_entered() -> void:
+	Global.emit_signal("enable_mouse_action", Global.EntityType.TREE)
+
+
+func _on_mouse_exited() -> void:
+	Global.emit_signal("disable_mouse_action", Global.EntityType.TREE)
