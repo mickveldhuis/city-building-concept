@@ -1,8 +1,8 @@
 extends Area2D
 
 
-signal door_entered(body)
+signal interacted(body)
 
 
 func on_interact(body : KinematicBody2D) -> void:
-	emit_signal("door_entered", body)
+	emit_signal("interacted", body)

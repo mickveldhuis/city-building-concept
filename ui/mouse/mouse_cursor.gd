@@ -17,7 +17,7 @@ func _ready() -> void:
 	configure_tool_animation()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	position = get_global_mouse_position()
 	
 	if is_anim_allowed and Input.is_action_just_pressed("action"):

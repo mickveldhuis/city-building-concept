@@ -3,12 +3,10 @@
 [ext_resource path="res://entities/buildings/assets/house.png" type="Texture" id=1]
 [ext_resource path="res://entities/buildings/house.gd" type="Script" id=2]
 [ext_resource path="res://entities/buildings/resources/house.tres" type="Resource" id=3]
+[ext_resource path="res://entities/interaction_area.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 21, 15 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 22, 16 )
+extents = Vector2( 22, 15 )
 
 [node name="House" type="StaticBody2D"]
 collision_layer = 2
@@ -24,12 +22,6 @@ centered = false
 position = Vector2( 0, -16 )
 shape = SubResource( 1 )
 
-[node name="HurtBox" type="Area2D" parent="."]
-position = Vector2( 0, -32 )
-monitoring = false
-collision_layer = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2( 0, 16 )
-z_index = 10
-shape = SubResource( 2 )
+[node name="InteractionArea" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, -16 )
+scale = Vector2( 1.5, 2.5 )

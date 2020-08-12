@@ -25,7 +25,7 @@ func modify_item_count_by(n : int) -> void:
 
 func empty_inventory() -> void:
 	current_item.amount = 0
-	set_item(Global.ItemType.EMPTY)	
+	set_item(Global.ItemType.EMPTY)
 
 
 func drop_items() -> void:

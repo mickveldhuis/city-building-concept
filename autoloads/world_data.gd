@@ -3,6 +3,8 @@ extends Node
 
 signal world_data_updated
 
+
+var time : int = 0
 var item_supply = {
 	Global.ItemType.WOOD: 0,
 	Global.ItemType.STONE: 0,
