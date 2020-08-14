@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://resources/placeable_data.gd" type="Script" id=1]
+[ext_resource path="res://entities/crops/assets/crop_patch.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "crop"
+description = "a crop"
+type = 2
+entity_id = 1
+size = Vector2( 1, 2 )
+base_extent = Vector2( 1, 1 )
+sprite = ExtResource( 2 )

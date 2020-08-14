@@ -25,6 +25,11 @@ _global_script_classes=[ {
 "path": "res://resources/building.gd"
 }, {
 "base": "Resource",
+"class": "Crop",
+"language": "GDScript",
+"path": "res://resources/crop.gd"
+}, {
+"base": "Resource",
 "class": "PlaceableData",
 "language": "GDScript",
 "path": "res://resources/placeable_data.gd"
@@ -38,6 +43,7 @@ _global_script_class_icons={
 "BaseItem": "",
 "BaseTool": "",
 "Building": "",
+"Crop": "",
 "PlaceableData": "",
 "WorldMap": ""
 }

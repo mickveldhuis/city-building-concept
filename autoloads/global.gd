@@ -13,25 +13,30 @@ enum ItemType {
 	EMPTY,
 	WOOD,
 	STONE,
+	WHEAT,
 }
 enum PlaceableType {
 	BUILDING,
 	INFRASTRUCTURE,
+	CROP,
 }
 enum BuildingType {
 	HOUSE,
+	BARN,
+	FARM,
 	INN,
 	BLACKSMITH,
 	GATHERER,
 	FISHERY,
-	BARN,
 }
 enum PlaceableGroup {
 	BUILDING,
 	INFRASTRUCTURE,
+	CROP,
 }
 enum EntityType {
 	EMPTY,
+	CROP,
 	TREE,
 	ROCK,
 	ROAD,
@@ -44,5 +49,5 @@ enum EntityType {
 	FARM,
 }
 
-const TILE_SIZE = 16
-const STATELESS_ENTITIES = [EntityType.TREE, EntityType.ROCK, EntityType.ROAD]
+const TILE_SIZE : int = 16 # pixels wide & long
+const STATELESS_ENTITIES : Array = [EntityType.TREE, EntityType.ROCK, EntityType.ROAD]

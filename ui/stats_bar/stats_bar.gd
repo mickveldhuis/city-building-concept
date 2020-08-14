@@ -1,8 +1,9 @@
 extends MarginContainer
 
 
-onready var wood_counter : Label = $Panel/HBoxContainer/WoodCounter
-onready var stone_counter : Label = $Panel/HBoxContainer/StoneCounter
+onready var wood_counter : Label = $Panel/LeftContainer/WoodCounter
+onready var stone_counter : Label = $Panel/LeftContainer/StoneCounter
+onready var day_counter : Label = $Panel/RightContainer/DayCounter
 
 
 func _ready() -> void:
@@ -17,3 +18,4 @@ func _on_world_data_updated() -> void:
 func update_stats_bar() -> void:
 	wood_counter.text = "Wood: %s" % str(WorldData.item_supply[Global.ItemType.WOOD])
 	stone_counter.text = "Stone: %s" % str(WorldData.item_supply[Global.ItemType.STONE])
+	day_counter.text = "Day: %s" % str(WorldData.date_time.day)

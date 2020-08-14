@@ -2,10 +2,14 @@ extends Node
 
 
 signal world_data_updated
+signal new_day_commenced
 
 
-var time : int = 0
-var item_supply = {
+var date_time : Dictionary = {
+	day = 1,
+	time = 0,
+}
+var item_supply : Dictionary = {
 	Global.ItemType.WOOD: 0,
 	Global.ItemType.STONE: 0,
 }
@@ -33,3 +37,9 @@ func take_from_supply(type : int, amount : int) -> int:
 	modify_supply(type, -amount)
 	emit_signal("world_data_updated")
 	return amount
+
+
+func add_new_day() -> void:
+	date_time.day += 1
+	emit_signal("new_day_commenced")
+	emit_signal("world_data_updated")

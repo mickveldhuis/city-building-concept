@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/common_assets/grass_collection.png" type="Texture" id=2]
@@ -10,9 +10,11 @@
 [ext_resource path="res://entities/buildings/house.tscn" type="PackedScene" id=8]
 [ext_resource path="res://entities/buildings/barn.tscn" type="PackedScene" id=9]
 [ext_resource path="res://nodes/world_map.gd" type="Script" id=10]
-[ext_resource path="res://scenes/world/day_night_cycle.gd" type="Script" id=11]
+[ext_resource path="res://scenes/world/day_night_cycle.tscn" type="PackedScene" id=11]
+[ext_resource path="res://entities/crops/crop.tscn" type="PackedScene" id=12]
+[ext_resource path="res://entities/crops/resources/wheat.tres" type="Resource" id=13]
 
-[sub_resource type="TileSet" id=1]
+[sub_resource type="TileSet" id=2]
 0/name = "grass_collection.png 0"
 0/texture = ExtResource( 2 )
 0/tex_offset = Vector2( 0, 0 )
@@ -35,7 +37,7 @@
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="TileSet" id=2]
+[sub_resource type="TileSet" id=3]
 0/name = "dirt_collection.png 0"
 0/texture = ExtResource( 3 )
 0/tex_offset = Vector2( 0, 0 )
@@ -60,8 +62,7 @@
 
 [node name="World" type="Node2D"]
 
-[node name="DayNightCycle" type="CanvasModulate" parent="."]
-script = ExtResource( 11 )
+[node name="DayNightCycle" parent="." instance=ExtResource( 11 )]
 
 [node name="Canvas" type="CanvasLayer" parent="."]
 
@@ -75,7 +76,7 @@ script = ExtResource( 10 )
 
 [node name="Ground" type="TileMap" parent="."]
 position = Vector2( 160, 144.149 )
-tile_set = SubResource( 1 )
+tile_set = SubResource( 2 )
 cell_size = Vector2( 16, 16 )
 cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
 format = 1
@@ -83,7 +84,7 @@ tile_data = PoolIntArray( -524298, 0, 1, -524297, 0, 1, -524296, 0, 1, -524295, 
 
 [node name="Dirt" type="TileMap" parent="."]
 position = Vector2( 48, 16.0165 )
-tile_set = SubResource( 2 )
+tile_set = SubResource( 3 )
 cell_size = Vector2( 16, 16 )
 cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
 format = 1
@@ -95,6 +96,10 @@ tile_data = PoolIntArray( -65534, 0, 65536, -65533, 0, 65537, -65532, 0, 65537, 
 position = Vector2( 288, 224.231 )
 
 [node name="Placeables" type="YSort" parent="YSort"]
+
+[node name="Crop" parent="YSort/Placeables" instance=ExtResource( 12 )]
+position = Vector2( 512, 72 )
+crop_data = ExtResource( 13 )
 
 [node name="House" parent="YSort/Placeables" instance=ExtResource( 8 )]
 position = Vector2( 424, 88.0909 )

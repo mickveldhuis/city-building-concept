@@ -5,6 +5,7 @@ enum {
 	NONE_SELECTED,
 	HOUSES,
 	INFRASTRUCTURE,
+	CROPS
 }
 
 var selector_active : bool = false
@@ -13,10 +14,12 @@ var active_menu_btn : int = NONE_SELECTED
 onready var menu_buttons = {
 	HOUSES: $Categories/Houses/Toggle,
 	INFRASTRUCTURE: $Categories/Infrastructure/Toggle,
+	CROPS: $Categories/Crops/Toggle,
 }
 onready var menu = {
 	HOUSES: $Categories/Houses/Menu,
 	INFRASTRUCTURE: $Categories/Infrastructure/Menu,
+	CROPS: $Categories/Crops/Menu,
 }
 
 
@@ -138,3 +141,11 @@ func _on_dirt_road_button_up() -> void:
 
 func _on_barn_button_up() -> void:
 	instantiate_selector_for(Global.EntityType.BARN)
+
+
+func _on_crops_btn_toggled(button_pressed: bool) -> void:
+	menu_button_toggled(CROPS)
+
+
+func _on_wheat_button_up() -> void:
+	instantiate_selector_for(Global.EntityType.CROP)
