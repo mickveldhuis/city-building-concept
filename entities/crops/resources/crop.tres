@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://resources/placeable_data.gd" type="Script" id=1]
-[ext_resource path="res://entities/crops/assets/crop_patch.png" type="Texture" id=2]
+[ext_resource path="res://entities/crops/assets/tilted_soil.png" type="Texture" id=2]
 
 [resource]
 script = ExtResource( 1 )

@@ -6,4 +6,6 @@
 [resource]
 script = ExtResource( 1 )
 name = "wheat"
+type = 0
 sprite_sheet = ExtResource( 2 )
+growth_stage = 0

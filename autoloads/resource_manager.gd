@@ -11,7 +11,7 @@ onready var components = {
 onready var placeables = {
 	Global.EntityType.BARN:preload("res://entities/buildings/barn.tscn"),
 	Global.EntityType.HOUSE: preload("res://entities/buildings/house.tscn"),
-	Global.EntityType.CROP: preload("res://entities/crops/crop.tscn"),
+	Global.EntityType.CROP: preload("res://entities/crops/tilted_soil.tscn"),
 }
 onready var placeable_resources = {
 	Global.EntityType.BARN:preload("res://entities/buildings/resources/barn.tres"),
@@ -21,7 +21,10 @@ onready var placeable_resources = {
 onready var placeable_sprites = {
 	Global.EntityType.BARN: preload("res://entities/buildings/assets/barn.png"),
 	Global.EntityType.HOUSE: preload("res://entities/buildings/assets/house.png"),
-	Global.EntityType.CROP: preload("res://entities/crops/assets/crop_patch.png"),
+	Global.EntityType.CROP: preload("res://entities/crops/assets/tilted_soil.png"),
+}
+onready var crops = {
+	Global.CropType.WHEAT: preload("res://entities/crops/resources/wheat.tres"),
 }
 onready var tools = {
 	Global.ToolType.AXE: preload("res://ui/inventory/resources/tools/axe.tres"),

@@ -46,6 +46,19 @@ func instantiate_selector_for(entity : int) -> void:
 		world.add_child(selector)
 
 
+func instantiate_resource_selector_for(resource : Resource) -> void:
+	if not selector_active:
+		toggle_disability_current_menu()
+		selector_active = true
+		
+		var selector = ResourceManager.components["tile_selector"].instance()
+		selector.set_placeable_resource(resource)
+		
+		var world = get_tree().current_scene
+		world.add_child(selector)
+	
+
+
 func free_selector() -> void:
 	toggle_disability_current_menu()
 	selector_active = false

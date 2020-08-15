@@ -48,6 +48,10 @@ enum EntityType {
 	BARN,
 	FARM,
 }
+enum CropType {
+	WHEAT,
+	POTATO,
+}
 
 const TILE_SIZE : int = 16 # pixels wide & long
 const STATELESS_ENTITIES : Array = [EntityType.TREE, EntityType.ROCK, EntityType.ROAD]

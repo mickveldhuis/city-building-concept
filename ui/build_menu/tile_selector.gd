@@ -6,7 +6,13 @@ enum SelectorState {
 	BLOCKED,
 }
 
+enum SelectorType {
+	PLACEABLE,
+	RESOURCE,
+}
+
 var state : int = SelectorState.CLEAR
+var type : int = SelectorType.PLACEABLE
 var size : Vector2 = Vector2(1, 1) # Size in units of 16 pixels
 var placeable_texture : Texture = null
 var placeable_data : Dictionary = {
@@ -14,6 +20,7 @@ var placeable_data : Dictionary = {
 	base_extent = null,
 	size = null,
 	delta_y = null,
+	resource = null,
 }
 
 onready var selector_rect : NinePatchRect = $SelectorRect
@@ -29,10 +36,16 @@ func _process(_delta: float) -> void:
 	_update_selector_state()
 
 
-func _update_selector_state() -> void:
+func _update_selector_state(is_placing_resource : bool = false, entity: int = 0) -> void:
 	var tile_pos : Vector2  = ConstructionManager.map.world_to_map(rect_position)
-	var is_blocked : bool = ConstructionManager.map.are_cells_empty(tile_pos.x, 
-			tile_pos.y, placeable_data.base_extent.x, placeable_data.base_extent.y)
+	var is_blocked : bool 
+	
+	if is_placing_resource:
+		ConstructionManager.map.do_cells_contain(tile_pos.x, tile_pos.y, placeable_data.base_extent.x, 
+									placeable_data.base_extent.y, entity)
+	else:
+		is_blocked = ConstructionManager.map.are_cells_empty(tile_pos.x, tile_pos.y, 
+						placeable_data.base_extent.x, placeable_data.base_extent.y)
 	
 	if is_blocked:
 		selector_rect.texture = ResourceManager.sprites["selector_error"]
@@ -76,7 +89,16 @@ func set_placeable(entity : int) -> void:
 	
 	placeable_texture = ResourceManager.placeable_sprites[entity]
 	size = _data.base_extent
+
+func set_placeable_resource(resource : Resource) -> void:
+	placeable_data.resource = resource
+	placeable_data.entity = null
+	placeable_data.base_extent = Vector2.ONE
+	placeable_data.size = Vector2.ONE
+	placeable_data.delta_y = 0
 	
+	placeable_texture = resource.icon
+	size = placeable_data.base_extent
 
 
 func init_selector() -> void:

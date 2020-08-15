@@ -2,24 +2,37 @@ extends Area2D
 
 
 export(Resource) var data
-export(Resource) var crop_data
+export(Resource) var crop
 
 onready var sprite : Sprite = $CropSprite
 
+onready var placeable_tile_map : TileMap = get_tree().current_scene.get_node("BackgroundPlaceables")
+
 
 func _ready() -> void:
-	crop_data = load("res://entities/crops/resources/wheat.tres")
+	crop = load("res://entities/crops/resources/wheat.tres")
 	
-	if crop_data:
-		sprite.texture = crop_data.sprite_sheet
-		sprite.hframes = crop_data.get_growth_length_in_days()
+	if crop:
+		sprite.texture = crop.sprite_sheet
+		sprite.hframes = crop.get_growth_length_in_days()
 		sprite.frame = 0
 	
-	var _err = WorldData.connect("new_day_commenced", self, "_on_new_day_commenced")
+	_init_tilted_soil()
+	WorldData.connect("new_day_commenced", self, "_on_new_day_commenced")
+
+
+func _init_tilted_soil() -> void:
+	var map_pos : Vector2 = placeable_tile_map.world_to_map(global_position)
+	placeable_tile_map.set_cellv(map_pos, 1)
+
+
+func _destruct_tilted_soil() -> void:
+	var map_pos : Vector2 = placeable_tile_map.world_to_map(global_position)
+	placeable_tile_map.set_cellv(map_pos, -1)
 
 
 func _on_new_day_commenced() -> void:
-	if sprite.frame + 1 < sprite.hframes:
+	if crop and sprite.frame + 1 < sprite.hframes:
 		sprite.frame += 1
 
 
@@ -31,8 +44,8 @@ func get_left_corner_position() -> Vector2:
 	return -$CropSprite.position
 
 
-func set_additional_placeable_data(data : Dictionary) -> void:
+func set_additional_resource_data(res_data : Resource) -> void:
 	"""Set additional data passed through from the 
 	   build menu.
 	"""
-	crop_data = data.crop_resource
+	crop = res_data
