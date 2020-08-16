@@ -23,6 +23,10 @@ func build(pos : Vector2, entity : int) -> void:
 		
 		var world = get_tree().current_scene
 		world.get_node("YSort/Placeables").add_child(object)
+		
+		var object_path : NodePath = object.get_path()
+		map.set_cell_path(_tile_pos.x, _tile_pos.y, object_path)
+		
 	else:
 		print("Cannot build @ ({x}, {y})".format({"x": pos.x, "y": pos.y}))
 

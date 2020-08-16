@@ -5,11 +5,6 @@
 [ext_resource path="res://entities/hurtbox.gd" type="Script" id=3]
 [ext_resource path="res://common_assets/sound_effects/pickaxe.wav" type="AudioStream" id=4]
 
-
-
-
-
-
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.99996
 height = 20.0001

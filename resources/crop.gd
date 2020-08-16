@@ -5,6 +5,7 @@ class_name Crop
 
 export(String) var name
 export(Global.CropType) var type
+export(Global.EntityType) var target_entity
 export(Texture) var sprite_sheet
 export(Texture) var icon
 export(int) var growth_stage # in number of days

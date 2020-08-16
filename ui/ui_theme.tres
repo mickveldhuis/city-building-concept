@@ -1,11 +1,12 @@
-[gd_resource type="Theme" load_steps=8 format=2]
+[gd_resource type="Theme" load_steps=9 format=2]
 
 [ext_resource path="res://ui/common_assets/fonts/dogica/dogica.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://ui/inventory/assets/inventory_slot.png" type="Texture" id=2]
+[ext_resource path="res://ui/common_assets/fonts/c_and_c/c_and_c_alert_inet.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=1]
-size = 7
-font_data = ExtResource( 1 )
+size = 10
+font_data = ExtResource( 3 )
 
 [sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 2 )

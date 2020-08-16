@@ -209,6 +209,21 @@ func are_cells_empty(x : int, y : int, w : int, h : int) -> bool:
 	return _is_blocked
 
 
+func is_cell_populated_by(x : int, y : int, entity : int) -> bool:
+	var tile : Tile = get_cell_tile(x, y)
+	return tile.type == entity
+
+
+func do_cells_contain(x : int, y : int, w : int, h : int, entity : int) -> bool:
+	var _contains_tile : bool = false
+	
+	for i in range(x, x + w):
+		for j in range(y, y + h):
+			var _is_same_tile : bool = is_cell_populated_by(x, y, entity)
+			_contains_tile = _contains_tile or _is_same_tile
+	
+	return _contains_tile
+
 func reset_cell(x : int, y : int) -> void:
 	if map[x][y] and _is_cell_empty(x, y):
 		# Get in which direction the tile has neighbors of a tile group (i.e. a house)
@@ -240,3 +255,24 @@ func get_cell_tile(x : int, y : int) -> Tile:
 func get_cell_node_path(x : int, y : int) -> NodePath:
 	var tile : Tile = map[x][y]
 	return tile.node_path
+
+
+func set_cell_path(x : int, y : int, path : NodePath) -> void:
+	if map[x][y]:
+		# Get in which direction the tile has neighbors of a tile group (i.e. a house)
+		var dirs : Dictionary = map[x][y].get_group_neighbors()
+		
+		# Set the current cell's node path
+		map[x][y].set_node_path(path)
+		
+		if dirs.left:
+			set_cell_path(x - 1, y, path)
+		
+		if dirs.right:
+			set_cell_path(x - 1, y, path)
+		
+		if dirs.top:
+			set_cell_path(x - 1, y, path)
+		
+		if dirs.bottom:
+			set_cell_path(x - 1, y, path)

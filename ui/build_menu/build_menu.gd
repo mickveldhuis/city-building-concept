@@ -21,6 +21,7 @@ onready var menu = {
 	INFRASTRUCTURE: $Categories/Infrastructure/Menu,
 	CROPS: $Categories/Crops/Menu,
 }
+onready var oi : Control = $ObjectInstantiator
 
 
 func _ready() -> void:
@@ -29,7 +30,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("action") and selector_active:
-		place_object()
+		instantiate_selection()
 	elif Input.is_action_just_pressed("interact") and selector_active:
 		free_selector()
 
@@ -56,7 +57,6 @@ func instantiate_resource_selector_for(resource : Resource) -> void:
 		
 		var world = get_tree().current_scene
 		world.add_child(selector)
-	
 
 
 func free_selector() -> void:
@@ -66,21 +66,13 @@ func free_selector() -> void:
 	get_tree().current_scene.get_node("TileSelector").queue_free()
 
 
-func place_object() -> void:
+func instantiate_selection() -> void:
 	var ts : Control = get_tree().current_scene.get_node("TileSelector")
-	var location : Vector2 = ts.get_location()
-	var data : Dictionary = ts.placeable_data
 	
-	ConstructionManager.build(location, data.entity)
-	
-#	if not ts.is_blocked():
-#		var object = ResourceManager.placeables[data.entity].instance()
-#		var loc_offset : Vector2 = object.get_left_corner_position() - Vector2(0, data.delta_y)
-#
-#		object.set_position(location + loc_offset)
-#
-#		var world = get_tree().current_scene
-#		world.get_node("YSort/Placeables").add_child(object)
+	if ts.is_placing_object():
+		oi.place_object()
+	else:
+		oi.add_resource()
 
 
 func toggle_visibility() -> void:
@@ -161,4 +153,8 @@ func _on_crops_btn_toggled(button_pressed: bool) -> void:
 
 
 func _on_wheat_button_up() -> void:
+	instantiate_resource_selector_for(ResourceManager.crops[Global.CropType.WHEAT])
+
+
+func _on_crop_patch_button_up() -> void:
 	instantiate_selector_for(Global.EntityType.CROP)

@@ -38,6 +38,8 @@ func swap_tool() -> void:
 		Global.ToolType.AXE:
 			set_tool(Global.ToolType.PICKAXE)
 		Global.ToolType.PICKAXE:
+			set_tool(Global.ToolType.HOE)
+		Global.ToolType.HOE:
 			set_tool(Global.ToolType.AXE)
 
 

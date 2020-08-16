@@ -11,4 +11,5 @@ type = 2
 entity_id = 1
 size = Vector2( 1, 2 )
 base_extent = Vector2( 1, 1 )
+has_selector_offset = false
 sprite = ExtResource( 2 )

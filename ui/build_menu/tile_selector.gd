@@ -36,13 +36,14 @@ func _process(_delta: float) -> void:
 	_update_selector_state()
 
 
-func _update_selector_state(is_placing_resource : bool = false, entity: int = 0) -> void:
+func _update_selector_state(entity: int = 0) -> void:
 	var tile_pos : Vector2  = ConstructionManager.map.world_to_map(rect_position)
 	var is_blocked : bool 
 	
-	if is_placing_resource:
-		ConstructionManager.map.do_cells_contain(tile_pos.x, tile_pos.y, placeable_data.base_extent.x, 
-									placeable_data.base_extent.y, entity)
+	if type == SelectorType.RESOURCE:
+		is_blocked = not ConstructionManager.map.do_cells_contain(tile_pos.x, tile_pos.y, 
+						placeable_data.base_extent.x, placeable_data.base_extent.y,
+						placeable_data.resource.target_entity)
 	else:
 		is_blocked = ConstructionManager.map.are_cells_empty(tile_pos.x, tile_pos.y, 
 						placeable_data.base_extent.x, placeable_data.base_extent.y)
@@ -85,20 +86,27 @@ func set_placeable(entity : int) -> void:
 	placeable_data.entity = entity
 	placeable_data.base_extent = _data.base_extent
 	placeable_data.size = _data.size
-	placeable_data.delta_y = Global.TILE_SIZE * int(abs(_data.size.y - _data.base_extent.y))
+	
+	if _data.has_selector_offset:
+		placeable_data.delta_y = Global.TILE_SIZE * int(abs(_data.size.y - _data.base_extent.y))
+	else:
+		placeable_data.delta_y = 0
 	
 	placeable_texture = ResourceManager.placeable_sprites[entity]
 	size = _data.base_extent
+	
+	type = SelectorType.PLACEABLE
 
 func set_placeable_resource(resource : Resource) -> void:
 	placeable_data.resource = resource
-	placeable_data.entity = null
 	placeable_data.base_extent = Vector2.ONE
 	placeable_data.size = Vector2.ONE
 	placeable_data.delta_y = 0
 	
 	placeable_texture = resource.icon
 	size = placeable_data.base_extent
+	
+	type = SelectorType.RESOURCE
 
 
 func init_selector() -> void:
@@ -114,3 +122,7 @@ func init_selector() -> void:
 
 func is_blocked() -> bool:
 	return state == SelectorState.BLOCKED
+
+
+func is_placing_object() -> bool:
+	return type == SelectorType.PLACEABLE
