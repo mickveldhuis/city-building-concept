@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://resources/base_item.gd" type="Script" id=1]
+[ext_resource path="res://ui/inventory/assets/wheat.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "wheat"
+type = 3
+amount = 1
+max_amount = 999
+icon = ExtResource( 2 )
+sprite = ExtResource( 2 )

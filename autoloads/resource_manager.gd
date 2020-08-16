@@ -29,11 +29,13 @@ onready var crops = {
 onready var tools = {
 	Global.ToolType.AXE: preload("res://ui/inventory/resources/tools/axe.tres"),
 	Global.ToolType.PICKAXE: preload("res://ui/inventory/resources/tools/pickaxe.tres"),
+	Global.ToolType.HOE: preload("res://ui/inventory/resources/tools/hoe.tres"),
 }
 onready var items = {
 	Global.ItemType.EMPTY: preload("res://ui/inventory/resources/items/empty_item.tres"),
 	Global.ItemType.WOOD: preload("res://ui/inventory/resources/items/wood.tres"),
 	Global.ItemType.STONE: preload("res://ui/inventory/resources/items/stone.tres"),
+	Global.ItemType.WHEAT: preload("res://ui/inventory/resources/items/wheat.tres"),
 }
 onready var pickups = {
 	Global.ItemType.WOOD: preload("res://entities/pickups/wood_pickup.tscn"),

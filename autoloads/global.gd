@@ -8,6 +8,8 @@ enum ToolType {
 	AXE,
 	PICKAXE,
 	SWORD,
+	HOE,
+	HAMMER,
 }
 enum ItemType {
 	EMPTY,
