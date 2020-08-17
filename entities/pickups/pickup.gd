@@ -1,10 +1,10 @@
 extends Area2D
 
 
-export(Global.ItemType) var item_type = Global.ItemType.EMPTY
+export(Resource) var item
+
 var amount : int = 1
 var timer_wait_time : float = 1
-
 var has_timer : bool = false
 var timer_finished : bool = false
 var timer : Timer
@@ -13,6 +13,11 @@ var timer : Timer
 func _ready() -> void:
 	if has_timer:
 		create_timer(timer_wait_time)
+
+
+func set_pickup_item(item_type : int) -> void:
+	item = ResourceManager.items[item_type]
+	$Sprite.texture = item.sprite
 
 
 func enable_timer() -> void:
@@ -30,13 +35,13 @@ func create_timer(wait_time : float) -> void:
 
 
 func _on_body_entered(body: Node) -> void:
-	if body.has_method("is_in_inventory") and body.has_method("add_to_inventory") \
+	if item and body.has_method("is_in_inventory") and body.has_method("add_to_inventory") \
 	   and (not has_timer or timer.is_stopped()):
-		if body.is_in_inventory(item_type) \
+		if body.is_in_inventory(item.type) \
 		   and Inventory.current_item.amount < Inventory.current_item.max_amount:
 			body.add_to_inventory(amount)
 			queue_free()
 		elif Inventory.current_item.type == Global.ItemType.EMPTY:
-			Inventory.set_item(item_type)
+			Inventory.set_item(item.type)
 			body.add_to_inventory(amount)
 			queue_free()

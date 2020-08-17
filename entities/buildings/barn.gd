@@ -7,6 +7,7 @@ export(int) var max_supply_count = 50
 var supply : Dictionary = {
 	Global.ItemType.WOOD: 0,
 	Global.ItemType.STONE: 0,
+	Global.ItemType.WHEAT: 0,
 }
 
 onready var resource_counter : Control = $ResourceCounter
@@ -35,17 +36,24 @@ func add_to_supply() -> void:
 		
 		_update_counter_label()
 
+
 func take_from_supply(type : int, amount : int) -> void:
 	if Inventory.current_item.type == type:
 		Inventory.modify_item_count_by(-amount)
 
 
 func _get_barn_reserve() -> int:
-	return supply[Global.ItemType.WOOD] + supply[Global.ItemType.STONE]
+	var supply_count : int = 0
+	
+	for item_count in supply.values():
+		supply_count += item_count
+	
+	return supply_count
 
 
 func _get_barn_space() -> int:
 	return max_supply_count - _get_barn_reserve()
+
 
 func _update_counter_label() -> void:
 	var current_count : int = _get_barn_reserve()

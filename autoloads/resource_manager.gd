@@ -37,7 +37,4 @@ onready var items = {
 	Global.ItemType.STONE: preload("res://ui/inventory/resources/items/stone.tres"),
 	Global.ItemType.WHEAT: preload("res://ui/inventory/resources/items/wheat.tres"),
 }
-onready var pickups = {
-	Global.ItemType.WOOD: preload("res://entities/pickups/wood_pickup.tscn"),
-	Global.ItemType.STONE: preload("res://entities/pickups/stone_pickup.tscn"),
-}
+onready var pickup = preload("res://entities/pickups/pickup.tscn")

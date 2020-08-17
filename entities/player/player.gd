@@ -145,10 +145,11 @@ func _on_item_dropped() -> void:
 		var x : int = int(rand_range(-disp, disp))
 		var y : int = int(rand_range(-disp, disp))
 		var pos_disp : Vector2 = Vector2(x, y)
-
-		var item = ResourceManager.pickups[Inventory.current_item.type].instance()
+		
+		var item = ResourceManager.pickup.instance()
 		item.enable_timer()
 		item.global_position = global_position + pos_disp
+		item.set_pickup_item(Inventory.current_item.type)
 
 		var world = get_tree().current_scene
 		world.get_node("YSort/Pickups").add_child(item)

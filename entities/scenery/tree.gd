@@ -28,8 +28,9 @@ func drop_loot() -> void:
 		var log_y : int = int(rand_range(-disp, disp))
 		var pos_disp : Vector2 = Vector2(log_x, log_y)
 		
-		var wood = ResourceManager.pickups[Global.ItemType.WOOD].instance()
+		var wood : Area2D = ResourceManager.pickup.instance()
 		wood.global_position = global_position + pos_disp
+		wood.set_pickup_item(Global.ItemType.WOOD)
 		
 		var world = get_tree().current_scene
 		world.get_node("YSort/Pickups").add_child(wood)

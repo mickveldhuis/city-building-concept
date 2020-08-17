@@ -38,20 +38,35 @@ __meta__ = {
 }
 
 [node name="WoodCounter" type="Label" parent="Panel/LeftContainer"]
+anchor_top = 0.04
+anchor_bottom = 0.04
 margin_top = 2.0
 margin_right = 64.0
 margin_bottom = 16.0
 text = "Wood: %s"
 valign = 1
-percent_visible = -0.142857
 
 [node name="StoneCounter" type="Label" parent="Panel/LeftContainer"]
+anchor_top = 0.04
+anchor_bottom = 0.04
 margin_left = 68.0
 margin_top = 2.0
 margin_right = 131.0
 margin_bottom = 16.0
 text = "Stone: %s"
 align = 1
+valign = 1
+
+[node name="FoodCounter" type="Label" parent="Panel/LeftContainer"]
+anchor_top = 0.04
+anchor_bottom = 0.04
+margin_left = 135.0
+margin_top = 2.0
+margin_right = 193.0
+margin_bottom = 16.0
+text = "Food: %s"
+align = 1
+valign = 1
 
 [node name="RightContainer" type="HBoxContainer" parent="Panel"]
 anchor_left = 1.0
@@ -68,6 +83,8 @@ __meta__ = {
 }
 
 [node name="DayCounter" type="Label" parent="Panel/RightContainer"]
+anchor_top = 0.04
+anchor_bottom = 0.04
 margin_top = 2.0
 margin_right = 51.0
 margin_bottom = 16.0

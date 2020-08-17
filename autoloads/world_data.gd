@@ -12,6 +12,7 @@ var date_time : Dictionary = {
 var item_supply : Dictionary = {
 	Global.ItemType.WOOD: 0,
 	Global.ItemType.STONE: 0,
+	Global.ItemType.WHEAT: 0,
 }
 
 
@@ -37,6 +38,10 @@ func take_from_supply(type : int, amount : int) -> int:
 	modify_supply(type, -amount)
 	emit_signal("world_data_updated")
 	return amount
+
+
+func get_food_supply() -> int:
+	return item_supply[Global.ItemType.WHEAT]
 
 
 func add_new_day() -> void:

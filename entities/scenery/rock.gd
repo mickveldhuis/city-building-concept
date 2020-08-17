@@ -6,7 +6,6 @@ export(int) var hp = 5
 var stone_dispersion : Vector2 = Vector2(hp, 3*hp)
 var pos_dispersion : int = 30
 
-
 onready var anim_player : AnimationPlayer = $AnimationPlayer
 onready var hit_sound : AudioStreamPlayer2D = $HitSound
 
@@ -29,8 +28,9 @@ func drop_loot() -> void:
 		var y : int = int(rand_range(-disp, disp))
 		var pos_disp : Vector2 = Vector2(x, y)
 		
-		var stone = ResourceManager.pickups[Global.ItemType.STONE].instance()
+		var stone : Area2D = ResourceManager.pickup.instance()
 		stone.global_position = global_position + pos_disp
+		stone.set_pickup_item(Global.ItemType.STONE)
 		
 		var world = get_tree().current_scene
 		world.get_node("YSort/Pickups").add_child(stone)
