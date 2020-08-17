@@ -77,8 +77,8 @@
 [node name="World" type="Node2D"]
 
 [node name="DayNightCycle" parent="." instance=ExtResource( 11 )]
-color = Color( 0.929412, 0.929412, 0.929412, 1 )
-day_duration_modifier = 100
+color = Color( 1, 1, 1, 1 )
+day_duration_modifier = 50
 
 [node name="Canvas" type="CanvasLayer" parent="."]
 
@@ -166,3 +166,5 @@ position = Vector2( 352, 280.289 )
 
 [node name="Rock3" parent="YSort/Rocks" instance=ExtResource( 6 )]
 position = Vector2( 48, 112.116 )
+
+[editable path="DayNightCycle"]
