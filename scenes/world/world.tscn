@@ -85,7 +85,6 @@ day_duration_modifier = 50
 [node name="UI" parent="Canvas" instance=ExtResource( 5 )]
 
 [node name="MouseCursor" parent="Canvas" instance=ExtResource( 7 )]
-scale = Vector2( 1, 0.998968 )
 
 [node name="WorldMap" type="Node" parent="."]
 script = ExtResource( 10 )

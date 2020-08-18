@@ -21,11 +21,13 @@ func _process(_delta: float) -> void:
 	position = get_global_mouse_position()
 	
 	if is_anim_allowed and Input.is_action_just_pressed("action"):
-		anim_player.play("use_tool")
+		pass
+#		anim_player.play("use_tool")
 
 
 func _on_tool_swapped() -> void:
 	configure_tool_animation()
+	pass
 
 
 func configure_tool_animation() -> void:
@@ -41,4 +43,4 @@ func configure_tool_animation() -> void:
 
 func _on_mouse_action_toggled(entity : int, enabled : bool) -> void:
 	is_anim_allowed = not is_anim_allowed
-	action_icon.visible = not action_icon.visible
+#	action_icon.visible = not action_icon.visible
