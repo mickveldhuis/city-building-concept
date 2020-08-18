@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://entities/buildings/barn.tscn" type="PackedScene" id=1]
+[ext_resource path="res://entities/buildings/house.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/factories/construction_factory.gd" type="Script" id=3]
+[ext_resource path="res://entities/crops/tilted_soil.tscn" type="PackedScene" id=4]
+
+[node name="ConstructionFactory" type="Node"]
+script = ExtResource( 3 )
+
+[node name="House" parent="." instance=ExtResource( 2 )]
+position = Vector2( 23, 31 )
+
+[node name="Barn" parent="." instance=ExtResource( 1 )]
+position = Vector2( 77, 47 )
+
+[node name="TiltedSoil" parent="." instance=ExtResource( 4 )]
+position = Vector2( 108, 0 )

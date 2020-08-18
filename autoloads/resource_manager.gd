@@ -8,11 +8,11 @@ onready var sprites = {
 onready var components = {
 	"tile_selector": preload("res://ui/build_menu/tile_selector.tscn"),
 }
-onready var placeables = {
-	Global.EntityType.BARN:preload("res://entities/buildings/barn.tscn"),
-	Global.EntityType.HOUSE: preload("res://entities/buildings/house.tscn"),
-	Global.EntityType.CROP: preload("res://entities/crops/tilted_soil.tscn"),
-}
+#onready var placeables = {
+#	Global.EntityType.BARN:preload("res://entities/buildings/barn.tscn"),
+#	Global.EntityType.HOUSE: preload("res://entities/buildings/house.tscn"),
+#	Global.EntityType.CROP: preload("res://entities/crops/tilted_soil.tscn"),
+#}
 onready var placeable_resources = {
 	Global.EntityType.BARN:preload("res://entities/buildings/resources/barn.tres"),
 	Global.EntityType.HOUSE: preload("res://entities/buildings/resources/house.tres"),
@@ -37,4 +37,5 @@ onready var items = {
 	Global.ItemType.STONE: preload("res://ui/inventory/resources/items/stone.tres"),
 	Global.ItemType.WHEAT: preload("res://ui/inventory/resources/items/wheat.tres"),
 }
-onready var pickup = preload("res://entities/pickups/pickup.tscn")
+onready var construction_factory : PackedScene = preload("res://entities/factories/construction_factory.tscn") 
+onready var pickup : PackedScene = preload("res://entities/pickups/pickup.tscn")

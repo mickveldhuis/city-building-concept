@@ -16,7 +16,8 @@ func build(pos : Vector2, entity : int) -> void:
 	var _err = map.set_cell_group(_tile_pos.x, _tile_pos.y, entity, _data.base_extent)
 	
 	if _err == 0:
-		var object = ResourceManager.placeables[entity].instance()
+		var factory : Node = ResourceManager.construction_factory.instance()
+		var object : Node = factory.get_placeable(entity)
 		var pos_offset : Vector2 = object.get_left_corner_position() - Vector2(0, _data.get_delta_y())
 		
 		object.set_position(pos + pos_offset)
