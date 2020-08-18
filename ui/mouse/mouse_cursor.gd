@@ -14,7 +14,7 @@ func _ready() -> void:
 	Global.connect("disable_mouse_action", self, "_on_mouse_action_toggled", [false])
 	
 	action_icon.visible = false
-	configure_tool_animation()
+#	configure_tool_animation()
 
 
 func _process(_delta: float) -> void:
@@ -26,8 +26,8 @@ func _process(_delta: float) -> void:
 
 
 func _on_tool_swapped() -> void:
-	configure_tool_animation()
 	pass
+#	configure_tool_animation()
 
 
 func configure_tool_animation() -> void:

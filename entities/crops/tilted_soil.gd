@@ -5,6 +5,7 @@ export(Resource) var data
 export(Resource) var crop
 export(int) var daily_target = 0
 
+
 var is_planted : bool = false
 var allow_growth : bool = true
 var daily_progress : int = 0

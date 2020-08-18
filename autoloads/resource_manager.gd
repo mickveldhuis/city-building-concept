@@ -30,6 +30,7 @@ onready var tools = {
 	Global.ToolType.AXE: preload("res://ui/inventory/resources/tools/axe.tres"),
 	Global.ToolType.PICKAXE: preload("res://ui/inventory/resources/tools/pickaxe.tres"),
 	Global.ToolType.HOE: preload("res://ui/inventory/resources/tools/hoe.tres"),
+	Global.ToolType.HAMMER: preload("res://ui/inventory/resources/tools/hammer.tres"),
 }
 onready var items = {
 	Global.ItemType.EMPTY: preload("res://ui/inventory/resources/items/empty_item.tres"),
