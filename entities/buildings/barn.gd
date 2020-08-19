@@ -4,6 +4,13 @@ extends StaticBody2D
 export(Resource) var data
 export(int) var max_supply_count = 50
 
+enum PlaceableState {
+	IN_CONSTRUCTION,
+	BUILT,
+}
+
+var state : int = PlaceableState.IN_CONSTRUCTION
+var construction_progress : int = 0
 var supply : Dictionary = {
 	Global.ItemType.WOOD: 0,
 	Global.ItemType.STONE: 0,
@@ -12,11 +19,18 @@ var supply : Dictionary = {
 
 onready var resource_counter : Control = $ResourceCounter
 onready var counter_label : Label = $ResourceCounter/CounterPanel/Counter
+onready var sprite : Sprite = $Sprite
+onready var hurtbox : Area2D = $Hurtbox
+onready var door : Area2D = $Door
 
 
 func _ready() -> void:
 	resource_counter.visible = false
 	_update_counter_label()
+	
+	if state == PlaceableState.IN_CONSTRUCTION:
+		sprite.modulate.a = 0.5
+		door.monitorable = false
 
 
 func add_to_supply() -> void:
@@ -72,8 +86,26 @@ func _on_door_interacted(_body : KinematicBody2D):
 
 
 func _on_door_mouse_entered():
-	resource_counter.visible = true
+	if state == PlaceableState.BUILT:
+		resource_counter.visible = true
 
 
 func _on_door_mouse_exited():
 	resource_counter.visible = false
+
+
+func _on_hurtbox_hit(body, dmg, type) -> void:
+	if construction_progress >= 100:
+		$Hurtbox.visible = false
+		sprite.modulate.a = 1
+		door.monitorable = true
+		
+		hurtbox.monitoring = false
+		hurtbox.monitorable = false
+		
+		resource_counter.visible = true
+		
+		state = PlaceableState.BUILT
+	
+	if type == Global.ToolType.HAMMER and state == PlaceableState.IN_CONSTRUCTION:
+		construction_progress += 50 #dmg
